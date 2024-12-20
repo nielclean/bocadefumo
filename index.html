@@ -6,12 +6,29 @@
     <link rel="icon" href="images/heart.png" type="image/png">
     <script src="js/api.js"></script>
     <style>
-        body {
-            width: 1024px;
-            margin: 0 auto;
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Impede a barra de rolagem */
+            margin: 0;
         }
+
+        body {
+            width: 1024px; /* Largura fixa para simular o modo desktop */
+            height: 100vh; /* Ajusta à altura da tela */
+            margin: 0 auto; /* Centraliza horizontalmente */
+            overflow: hidden; /* Evita a barra de rolagem */
+        }
+
         img, video, iframe {
             max-width: 100%;
+            height: auto;
+        }
+
+        video {
+            object-fit: cover; /* Ajusta o vídeo à tela */
+            width: 1024px; /* Mantém a largura fixa */
+            height: 100vh; /* Preenche a altura da tela */
         }
     </style>
 </head>
