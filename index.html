@@ -1,5 +1,7 @@
-<html><head><meta charset="UTF-8">
-    <meta name="viewport" content="width=1024, initial-scale=1.0">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title class="blinking-title">ㅤ</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/main.css">
@@ -9,41 +11,67 @@
         html, body {
             width: 100%;
             height: 100%;
-            overflow: hidden; /* Remove barras de rolagem no HTML e Body */
             margin: 0;
+            padding: 0;
+            overflow: hidden; /* Remove barras de rolagem */
         }
 
         body {
-            width: 1024px; /* Define largura fixa simulando desktop */
-            height: 100vh; /* Garante altura da tela */
-            margin: 0 auto; /* Centraliza horizontalmente */
-            position: relative; /* Mantém controle sobre posicionamento */
-        }
-
-        img, video, iframe {
-            max-width: 100%;
-            max-height: 100%;
-            display: block;
-            overflow: hidden;
+            max-width: 100%; /* Garante que o layout não exceda a largura da tela */
+            height: 100vh; /* Preenche a altura da tela */
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centraliza o conteúdo */
+            justify-content: center; /* Centraliza verticalmente */
+            position: relative;
         }
 
         video {
-            object-fit: cover; /* Faz o vídeo preencher sem exceder os limites */
-            width: 1024px; /* Largura fixa */
-            height: 100vh; /* Altura da tela */
-            position: absolute; /* Permite ajustar dentro do body */
+            object-fit: cover; /* Faz o vídeo preencher o espaço disponível */
+            width: 100vw; /* Adapta a largura ao viewport */
+            height: 100vh; /* Adapta a altura ao viewport */
+            position: absolute; /* Permite que o vídeo ocupe toda a tela */
             top: 0;
             left: 0;
+            z-index: -1; /* Mantém o vídeo de fundo */
         }
 
         .discord-profile {
-            overflow: hidden; /* Garante que elementos internos não extrapolem */
-            max-width: 100%;
+            width: 90%; /* Reduz a largura para caber em telas menores */
+            max-width: 800px; /* Limita a largura máxima */
+            margin: 10px auto; /* Espaçamento entre perfis */
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .pfp img {
+            width: 80px; /* Ajusta o tamanho das imagens */
+            height: 80px;
+            border-radius: 50%; /* Deixa a imagem circular */
         }
 
         .overlay {
-            overflow: hidden; /* Remove scroll das áreas de sobreposição */
-            max-width: 100%;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .discord-profile {
+                width: 95%;
+            }
+
+            .pfp img {
+                width: 60px;
+                height: 60px;
+            }
         }
     </style>
 </head>
@@ -56,91 +84,64 @@
             audio.play();
         }
     </script>
-    
-    
-    <audio loop="" preload="auto" id="audio">
+    <audio loop preload="auto" id="audio">
         <source src="media/speed.mp3" type="audio/mpeg">
     </audio>
-    
-    
-<input type="checkbox" autocomplete="off" id="overlay-toggle">
-<div class="overlay fullscreen">
-    <label for="overlay-toggle" onclick="audioPlay(); ">
-        <span class="overlayhover hover" style="font-family: monospace; font-size: 0.6em;">.gg/Fbf88mtWFa</span>
-
-
-
-    </label>
-</div>
-
-
-    <video autoplay="" loop="" muted="">
+    <input type="checkbox" autocomplete="off" id="overlay-toggle">
+    <div class="overlay fullscreen">
+        <label for="overlay-toggle" onclick="audioPlay();">
+            <span class="overlayhover hover" style="font-family: monospace; font-size: 0.6em;">.gg/Fbf88mtWFa</span>
+        </label>
+    </div>
+    <video autoplay loop muted>
         <source src="media/snow.mp4" type="video/mp4">
         Seu navegador não suporta vídeo.
     </video>
 
+    <!-- Perfis do Discord -->
     <div class="discord-profile">
-        <div class="profile animate__animated animate__fadeInUp animate__fast">
+        <div class="profile">
             <a target="_blank" href="https://discord.com/users/1276331283651493921">
                 <div class="pfp">
                     <img class="profile-img" data-user-id="1276331283651493921" src="media/pic.png">
                 </div>
             </a>
-            <div class="nickr" data-user-id="1276331283651493921">niel</div>
-                <div class="nick subnick" data-user-id="1276331283651493921">530x</div>
-            <div class="badges">
-                <div class="badge" style="background-image: url('images/nitro.gif')"></div>
-                <div class="badge" style="background-image: url('images/boosting_1.png')"></div>
-            </div>
+            <div class="nickr">niel</div>
+            <div class="nick subnick">530x</div>
         </div>
     </div>
-    
     <div class="discord-profile">
-        <div class="profile animate__animated animate__fadeInUp animate__fast">
+        <div class="profile">
             <a target="_blank" href="https://discord.com/users/1297957756699148420">
                 <div class="pfp">
                     <img class="profile-img" data-user-id="1297957756699148420" src="media/pic3.png">
                 </div>
             </a>
-            <div class="nickr" data-user-id="1297957756699148420">farewell, my heart</div>
-            <div class="nick subnick" data-user-id="1297957756699148420">695y</div>
-            <div class="badges">
-                <div class="badge" style="background-image: url('images/nitro.gif')"></div>     
-                <div class="badge" style="background-image: url('images/boosting_1.png')"></div>
-            </div>
+            <div class="nickr">farewell, my heart</div>
+            <div class="nick subnick">695y</div>
         </div>
     </div>
-
     <div class="discord-profile">
-        <div class="profile animate__animated animate__fadeInUp animate__fast">
+        <div class="profile">
             <a target="_blank" href="https://discord.com/users/1237977580364234762">
                 <div class="pfp">
                     <img class="profile-img" data-user-id="1237977580364234762" src="media/pic2.png">
                 </div>
             </a>
-            <div class="nickr" data-user-id="1237977580364234762">m0ngler</div>
-            <div class="nick subnick" data-user-id="1237977580364234762">301y</div>
-            <div class="badges">
-                 <div class="badge" style="background-image: url('images/nitro.gif')"></div>
-                <div class="badge" style="background-image: url('images/boosting_1.png')"></div>
-            </div>
+            <div class="nickr">m0ngler</div>
+            <div class="nick subnick">301y</div>
         </div>
     </div>
-
     <div class="discord-profile">
-        <div class="profile animate__animated animate__fadeInUp animate__fast">
+        <div class="profile">
             <a target="_blank" href="https://discord.com/users/715365964836896778">
                 <div class="pfp">
                     <img class="profile-img" data-user-id="715365964836896778" src="media/pic5.png">
                 </div>
             </a>
-            <div class="nickr" data-user-id="715365964836896778">y71l</div>
-            <div class="nick subnick" data-user-id="715365964836896778">3ye6yyyy</div>
-            <div class="badges">
-                 <div class="badge" style="background-image: url('images/nitro.gif')"></div>
-                <div class="badge" style="background-image: url('images/boosting_1.png')"></div>
-            </div>
+            <div class="nickr">y71l</div>
+            <div class="nick subnick">3ye6yyyy</div>
         </div>
     </div>
-    
-</body></html>
+</body>
+</html>
