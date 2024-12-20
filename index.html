@@ -9,26 +9,41 @@
         html, body {
             width: 100%;
             height: 100%;
-            overflow: hidden; /* Impede a barra de rolagem */
+            overflow: hidden; /* Remove barras de rolagem no HTML e Body */
             margin: 0;
         }
 
         body {
-            width: 1024px; /* Largura fixa para simular o modo desktop */
-            height: 100vh; /* Ajusta à altura da tela */
+            width: 1024px; /* Define largura fixa simulando desktop */
+            height: 100vh; /* Garante altura da tela */
             margin: 0 auto; /* Centraliza horizontalmente */
-            overflow: hidden; /* Evita a barra de rolagem */
+            position: relative; /* Mantém controle sobre posicionamento */
         }
 
         img, video, iframe {
             max-width: 100%;
-            height: auto;
+            max-height: 100%;
+            display: block;
+            overflow: hidden;
         }
 
         video {
-            object-fit: cover; /* Ajusta o vídeo à tela */
-            width: 1024px; /* Mantém a largura fixa */
-            height: 100vh; /* Preenche a altura da tela */
+            object-fit: cover; /* Faz o vídeo preencher sem exceder os limites */
+            width: 1024px; /* Largura fixa */
+            height: 100vh; /* Altura da tela */
+            position: absolute; /* Permite ajustar dentro do body */
+            top: 0;
+            left: 0;
+        }
+
+        .discord-profile {
+            overflow: hidden; /* Garante que elementos internos não extrapolem */
+            max-width: 100%;
+        }
+
+        .overlay {
+            overflow: hidden; /* Remove scroll das áreas de sobreposição */
+            max-width: 100%;
         }
     </style>
 </head>
