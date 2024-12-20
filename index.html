@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="blinking-title">ㅤ</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="images/heart.png" type="image/png">
+    <script src="js/api.js"></script>
+    <style>
+        /* Estilo básico */
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .fullscreen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .overlayhover {
+            font-size: 0.6em;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .discord-profile {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            gap: 15px;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 20px;
+            max-width: 250px;
+            width: 100%;
+        }
+
+        .profile-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        .nickr, .subnick {
+            font-size: 1em;
+            margin: 5px 0;
+        }
+
+        .badges {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .badge {
+            width: 20px;
+            height: 20px;
+            background-size: cover;
+        }
+
+        /* Estilos responsivos para celulares */
+        @media (max-width: 768px) {
+            body, html {
+                overflow-x: hidden;
+            }
+
+            .fullscreen {
+                flex-direction: column;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .discord-profile {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .profile {
+                max-width: 90%;
+            }
+
+            .profile-img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .nickr {
+                font-size: 0.9em;
+            }
+
+            .subnick {
+                font-size: 0.8em;
+            }
+
+            .badge {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        /* Ajustes para telas muito pequenas (ex.: celulares pequenos) */
+        @media (max-width: 480px) {
+            .overlayhover {
+                font-size: 0.5em;
+            }
+
+            .profile-img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .nickr, .subnick {
+                font-size: 0.75em;
+            }
+
+            .badge {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function audioPlay() {
+            var audio = document.getElementById("audio");
+            audio.volume = 1.0;
+            audio.currentTime = 0;
+            audio.play();
+        }
+    </script>
+    
+    <audio loop preload="auto" id="audio">
+        <source src="media/speed.mp3" type="audio/mpeg">
+    </audio>
+    
+    <input type="checkbox" autocomplete="off" id="overlay-toggle">
+    <div class="overlay fullscreen">
+        <label for="overlay-toggle" onclick="audioPlay();">
+            <span class="overlayhover hover" style="font-family: monospace;">.gg/Fbf88mtWFa</span>
+        </label>
+    </div>
+
+    <video autoplay loop muted>
+        <source src="media/snow.mp4" type="video/mp4">
+        Seu navegador não suporta vídeo.
+    </video>
+
+    <div class="discord-profile">
+        <div class="profile animate__animated animate__fadeInUp animate__fast">
+            <a target="_blank" href="https://discord.com/users/1276331283651493921">
+                <div class="pfp">
+                    <img class="profile-img" data-user-id="1276331283651493921" src="media/pic.png">
+                </div>
+            </a>
+            <div class="nickr" data-user-id="1276331283651493921">niel</div>
+            <div class="nick subnick" data-user-id="1276331283651493921">530x</div>
+            <div class="badges">
+                <div class="badge" style="background-image: url('images/nitro.gif')"></div>
+                <div class="badge" style="background-image: url('images/boosting_1.png')"></div>
+            </div>
+        </div>
+        <div class="profile animate__animated animate__fadeInUp animate__fast">
+            <a target="_blank" href="https://discord.com/users/1297957756699148420">
+                <div class="pfp">
+                    <img class="profile-img" data-user-id="1297957756699148420" src="media/pic3.png">
+                </div>
+            </a>
+            <div class="nickr" data-user-id="1297957756699148420">farewell, my heart</div>
+            <div class="nick subnick" data-user-id="1297957756699148420">695y</div>
+            <div class="badges">
+                <div class="badge" style="background-image: url('images/nitro.gif')"></div>     
+                <div class="badge" style="background-image: url('images/boosting_1.png')"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="discord-profile">
+        <div class="profile animate__animated animate__fadeInUp animate__fast">
+            <a target="_blank" href="https://discord.com/users/1237977580364234762">
+                <div class="pfp">
+                    <img class="profile-img" data-user-id="1237977580364234762" src="media/pic2.png">
+                </div>
+            </a>
+            <div class="nickr" data-user-id="1237977580364234762">m0ngler</div>
+            <div class="nick subnick" data-user-id="1237977580364234762">301y</div>
+            <div class="badges">
+                <div class="badge" style="background-image: url('images/nitro.gif')"></div>
+                <div class="badge" style="background-image: url('images/boosting_1.png')"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="discord-profile">
+        <div class="profile animate__animated animate__fadeInUp animate__fast">
+            <a target="_blank" href="https://discord.com/users/715365964836896778">
+                <div class="pfp">
+                    <img class="profile-img" data-user-id="715365964836896778" src="media/pic5.png">
+                </div>
+            </a>
+            <div class="nickr" data-user-id="715365964836896778">y71l</div>
+            <div class="nick subnick" data-user-id="715365964836896778">3ye6yyyy</div>
+            <div class="badges">
+                <div class="badge" style="background-image: url('images/nitro.gif')"></div>
+                <div class="badge" style="background-image: url('images/boosting_1.png')"></div>
+            </div>
+        </div>
+    </div>
+
+</body></html>
