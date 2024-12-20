@@ -1,147 +1,123 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title class="blinking-title">ㅤ</title>
+    <meta name="description" content="Perfil de usuários do Discord com links e animações.">
+    <meta name="keywords" content="Discord, Perfil, Nitro, Boost, Vídeo, Animação">
+    <meta property="og:title" content="Perfis do Discord">
+    <meta property="og:image" content="images/heart.png">
+    <title>Perfis do Discord</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" href="images/heart.png" type="image/png">
-    <script src="js/api.js"></script>
-    <style>
-        html, body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Remove barras de rolagem */
-        }
-
-        body {
-            max-width: 100%; /* Garante que o layout não exceda a largura da tela */
-            height: 100vh; /* Preenche a altura da tela */
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centraliza o conteúdo */
-            justify-content: center; /* Centraliza verticalmente */
-            position: relative;
-        }
-
-        video {
-            object-fit: cover; /* Faz o vídeo preencher o espaço disponível */
-            width: 100vw; /* Adapta a largura ao viewport */
-            height: 100vh; /* Adapta a altura ao viewport */
-            position: absolute; /* Permite que o vídeo ocupe toda a tela */
-            top: 0;
-            left: 0;
-            z-index: -1; /* Mantém o vídeo de fundo */
-        }
-
-        .discord-profile {
-            width: 90%; /* Reduz a largura para caber em telas menores */
-            max-width: 800px; /* Limita a largura máxima */
-            margin: 10px auto; /* Espaçamento entre perfis */
-            overflow: hidden;
-            text-align: center;
-        }
-
-        .pfp img {
-            width: 80px; /* Ajusta o tamanho das imagens */
-            height: 80px;
-            border-radius: 50%; /* Deixa a imagem circular */
-        }
-
-        .overlay {
-            width: 100%;
-            text-align: center;
-            position: absolute;
-            bottom: 10px;
-        }
-
-        /* Responsividade para telas menores */
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-
-            .discord-profile {
-                width: 95%;
-            }
-
-            .pfp img {
-                width: 60px;
-                height: 60px;
-            }
-        }
-    </style>
+    <script src="js/api.js" defer></script>
 </head>
+
 <body>
+
+    <!-- Função para tocar áudio -->
     <script>
         function audioPlay() {
-            var audio = document.getElementById("audio");
+            const audio = document.getElementById("audio");
             audio.volume = 0.4;
             audio.currentTime = 0;
             audio.play();
         }
     </script>
+    
+    <!-- Áudio -->
     <audio loop preload="auto" id="audio">
         <source src="media/speed.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
     </audio>
+
+    <!-- Overlay (Área clicável) -->
     <input type="checkbox" autocomplete="off" id="overlay-toggle">
     <div class="overlay fullscreen">
         <label for="overlay-toggle" onclick="audioPlay();">
             <span class="overlayhover hover" style="font-family: monospace; font-size: 0.6em;">.gg/Fbf88mtWFa</span>
         </label>
     </div>
-    <video autoplay loop muted>
+
+    <!-- Vídeo de fundo -->
+    <video autoplay loop muted preload="auto">
         <source src="media/snow.mp4" type="video/mp4">
         Seu navegador não suporta vídeo.
     </video>
 
-    <!-- Perfis do Discord -->
-    <div class="discord-profile">
-        <div class="profile">
-            <a target="_blank" href="https://discord.com/users/1276331283651493921">
-                <div class="pfp">
-                    <img class="profile-img" data-user-id="1276331283651493921" src="media/pic.png">
-                </div>
-            </a>
-            <div class="nickr">niel</div>
-            <div class="nick subnick">530x</div>
-        </div>
-    </div>
-    <div class="discord-profile">
-        <div class="profile">
-            <a target="_blank" href="https://discord.com/users/1297957756699148420">
-                <div class="pfp">
-                    <img class="profile-img" data-user-id="1297957756699148420" src="media/pic3.png">
-                </div>
-            </a>
-            <div class="nickr">farewell, my heart</div>
-            <div class="nick subnick">695y</div>
-        </div>
-    </div>
-    <div class="discord-profile">
-        <div class="profile">
-            <a target="_blank" href="https://discord.com/users/1237977580364234762">
-                <div class="pfp">
-                    <img class="profile-img" data-user-id="1237977580364234762" src="media/pic2.png">
-                </div>
-            </a>
-            <div class="nickr">m0ngler</div>
-            <div class="nick subnick">301y</div>
-        </div>
-    </div>
-    <div class="discord-profile">
-        <div class="profile">
-            <a target="_blank" href="https://discord.com/users/715365964836896778">
-                <div class="pfp">
-                    <img class="profile-img" data-user-id="715365964836896778" src="media/pic5.png">
-                </div>
-            </a>
-            <div class="nickr">y71l</div>
-            <div class="nick subnick">3ye6yyyy</div>
-        </div>
-    </div>
+    <!-- Perfis Discord -->
+    <main>
+        <section class="discord-profiles">
+            <!-- Perfil 1 -->
+            <article class="discord-profile">
+                <a href="https://discord.com/users/1276331283651493921" target="_blank" aria-label="Visitar perfil de niel">
+                    <div class="profile animate__animated animate__fadeInUp animate__fast">
+                        <div class="pfp">
+                            <img class="profile-img" src="media/pic.png" alt="Perfil de niel">
+                        </div>
+                        <div class="nickr">niel</div>
+                        <div class="nick subnick">530x</div>
+                        <div class="badges">
+                            <div class="badge" style="background-image: url('images/nitro.gif');" aria-label="Nitro"></div>
+                            <div class="badge" style="background-image: url('images/boosting_1.png');" aria-label="Boosting"></div>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Perfil 2 -->
+            <article class="discord-profile">
+                <a href="https://discord.com/users/1297957756699148420" target="_blank" aria-label="Visitar perfil de farewell, my heart">
+                    <div class="profile animate__animated animate__fadeInUp animate__fast">
+                        <div class="pfp">
+                            <img class="profile-img" src="media/pic3.png" alt="Perfil de farewell, my heart">
+                        </div>
+                        <div class="nickr">farewell, my heart</div>
+                        <div class="nick subnick">695y</div>
+                        <div class="badges">
+                            <div class="badge" style="background-image: url('images/nitro.gif');" aria-label="Nitro"></div>
+                            <div class="badge" style="background-image: url('images/boosting_1.png');" aria-label="Boosting"></div>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Perfil 3 -->
+            <article class="discord-profile">
+                <a href="https://discord.com/users/1237977580364234762" target="_blank" aria-label="Visitar perfil de m0ngler">
+                    <div class="profile animate__animated animate__fadeInUp animate__fast">
+                        <div class="pfp">
+                            <img class="profile-img" src="media/pic2.png" alt="Perfil de m0ngler">
+                        </div>
+                        <div class="nickr">m0ngler</div>
+                        <div class="nick subnick">301y</div>
+                        <div class="badges">
+                            <div class="badge" style="background-image: url('images/nitro.gif');" aria-label="Nitro"></div>
+                            <div class="badge" style="background-image: url('images/boosting_1.png');" aria-label="Boosting"></div>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Perfil 4 -->
+            <article class="discord-profile">
+                <a href="https://discord.com/users/715365964836896778" target="_blank" aria-label="Visitar perfil de y71l">
+                    <div class="profile animate__animated animate__fadeInUp animate__fast">
+                        <div class="pfp">
+                            <img class="profile-img" src="media/pic5.png" alt="Perfil de y71l">
+                        </div>
+                        <div class="nickr">y71l</div>
+                        <div class="nick subnick">3ye6yyyy</div>
+                        <div class="badges">
+                            <div class="badge" style="background-image: url('images/nitro.gif');" aria-label="Nitro"></div>
+                            <div class="badge" style="background-image: url('images/boosting_1.png');" aria-label="Boosting"></div>
+                        </div>
+                    </div>
+                </a>
+            </article>
+        </section>
+    </main>
+
 </body>
 </html>
