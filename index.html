@@ -1,11 +1,13 @@
-<html><head><meta charset="UTF-8">
+<html>
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title class="blinking-title">ㅤ</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/main.css">
-<link rel="icon" href="images/heart.png" type="image/png"><script src="js/api.js"></script></head>
-
-
+    <link rel="icon" href="images/heart.png" type="image/png">
+    <script src="js/api.js"></script>
+</head>
 <body>
 
     <script>
@@ -17,22 +19,16 @@
         }
     </script>
     
-    
     <audio loop="" preload="auto" id="audio">
         <source src="media/speed.mp3" type="audio/mpeg">
     </audio>
     
-    
-<input type="checkbox" autocomplete="off" id="overlay-toggle">
-<div class="overlay fullscreen">
-    <label for="overlay-toggle" onclick="audioPlay(); ">
-        <span class="overlayhover hover" style="font-family: monospace; font-size: 0.6em;">.gg/Fbf88mtWFa</span>
-
-
-
-    </label>
-</div>
-
+    <input type="checkbox" autocomplete="off" id="overlay-toggle">
+    <div class="overlay fullscreen">
+        <label for="overlay-toggle" onclick="audioPlay(); ">
+            <span class="overlayhover hover" style="font-family: monospace; font-size: 0.6em;">.gg/Fbf88mtWFa</span>
+        </label>
+    </div>
 
     <video autoplay="" loop="" muted="">
         <source src="media/snow.mp4" type="video/mp4">
@@ -47,7 +43,7 @@
                 </div>
             </a>
             <div class="nickr" data-user-id="1276331283651493921">niel</div>
-                <div class="nick subnick" data-user-id="1276331283651493921">530x</div>
+            <div class="nick subnick" data-user-id="1276331283651493921">530x</div>
             <div class="badges">
                 <div class="badge" style="background-image: url('images/nitro.gif')"></div>
                 <div class="badge" style="background-image: url('images/boosting_1.png')"></div>
@@ -102,5 +98,155 @@
             </div>
         </div>
     </div>
-    
-</body></html>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #36393F;
+        }
+
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .discord-profile {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;  /* Permite que os perfis se movam para a linha seguinte quando necessário */
+            gap: 20px;  /* Adiciona um espaço entre os perfis */
+            margin: 20px 0;
+            padding: 20px 0;
+        }
+
+        .profile {
+            width: 270px;
+            max-width: 400px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000000 100%);
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.4);
+            color: #FFFFFF;
+            position: relative;
+            margin: 25px;
+        }
+
+        .pfp img {
+            width: 150px;
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 4px solid #090909;
+            cursor: pointer;
+            transition: transform 0.2s, filter 0.2s;
+        }
+
+        .pfp img:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        .nickr {
+            font-size: 23px;
+            font-weight: bold;
+            margin: 0 0 -9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .subnick {
+            font-size: 15px;
+            opacity: 0.7;
+            user-select: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .badges {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .badge {
+            width: 23px;
+            height: 23px;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 0px;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .profile {
+                width: 100%;
+                max-width: 270px;
+                margin-top: 20px;
+            }
+
+            .pfp img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .nickr {
+                font-size: 18px;
+            }
+
+            .subnick {
+                font-size: 14px;
+            }
+
+            .badges {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .profile {
+                width: 100%;
+                max-width: 240px;
+            }
+
+            .pfp img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .nickr {
+                font-size: 16px;
+            }
+
+            .subnick {
+                font-size: 12px;
+            }
+
+            .badges {
+                flex-direction: column;
+            }
+        }
+    </style>
+
+</body>
+</html>
