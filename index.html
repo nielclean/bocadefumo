@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ㅤ</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Tap to Enter</title>
     <style>
         body {
             margin: 0;
             font-family: Verdana, sans-serif;
-            background-color: #000;
+            background-color: #000;  /* Fundo preto */
             color: #fff;
             display: flex;
             justify-content: center;
@@ -32,8 +31,8 @@
             display: none;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            padding: 20px;
+            gap: 10px;
+            padding: 30px;
             animation: fade-in 1s;
             position: absolute;
         }
@@ -75,10 +74,36 @@
             from { opacity: 1; }
             to { opacity: 0; }
         }
+
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        /* Estilos para o logo do Discord */
+        #discord-logo {
+            position: absolute;
+            bottom: 20px;  /* Posição no centro inferior */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #discord-logo:hover {
+            transform: translateX(-50%) scale(1.2);  /* Efeito de zoom */
+        }
+
     </style>
 </head>
 <body onclick="enterSite()">
-    <div class="start-screen">.gg/GDjg796Xbp</div>
+    <div class="start-screen">♰</div>
 
     <div class="profiles">
         <div class="profile-card">
@@ -87,7 +112,7 @@
             <div class="nickname secondary">530x</div>
         </div>
         <div class="profile-card">
-            <img src="https://i.ibb.co/qMcfLTw/pic3.png" alt="Profile 2">
+            <img src="https://cdn.discordapp.com/avatars/1297957756699148420/ad3152fe0b7859b235b7c3a1acad47ad.png?size=2048" alt="Profile 2">
             <div class="nickname primary">farewell, my heart</div>
             <div class="nickname secondary">695y</div>
         </div>
@@ -97,26 +122,154 @@
             <div class="nickname secondary">301y</div>
         </div>
         <div class="profile-card">
-            <img src="https://i.ibb.co/RQ7KttZ/pic5.png" alt="Profile 4">
+            <img src="https://cdn.discordapp.com/avatars/715365964836896778/5d63652db565cd6577506dfc824e55ff.png?size=2048" alt="Profile 4">
             <div class="nickname primary">y71l</div>
             <div class="nickname secondary">3ye6yyyy</div>
         </div>
     </div>
 
-    <script>
-        let audioPlayed = false;
+    <div id="particle-canvas"></div>
 
+    <!-- Logo do Discord -->
+    <img id="discord-logo" src="media/discord.png" alt="Discord Logo" onclick="window.location.href='https://discord.gg/GDjg796Xbp';">
+
+    <script>
+        (function(a) {
+            var c = function(a) {
+                this.canvas = a.canvas;
+                this.g = a.g;
+                this.particleColor = a.options.particleColor;
+                this.x = Math.random() * this.canvas.width;
+                this.y = Math.random() * this.canvas.height;
+                this.velocity = {
+                    x: (Math.random() - 0.5) * a.options.velocity,
+                    y: (Math.random() - 0.5) * a.options.velocity
+                };
+            };
+
+            c.prototype.update = function() {
+                if (this.x > this.canvas.width + 20 || this.x < -20) {
+                    this.velocity.x = -this.velocity.x;
+                }
+                if (this.y > this.canvas.height + 20 || this.y < -20) {
+                    this.velocity.y = -this.velocity.y;
+                }
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+            };
+
+            c.prototype.draw = function() {
+                this.g.beginPath();
+                this.g.fillStyle = this.particleColor;
+                this.g.globalAlpha = 0.7;
+                this.g.arc(this.x, this.y, 1.5, 0, 2 * Math.PI);
+                this.g.fill();
+            };
+
+            var b = function(a, b) {
+                this.i = a;
+                this.i.size = {
+                    width: this.i.offsetWidth,
+                    height: this.i.offsetHeight
+                };
+                b = b || {};
+                this.options = {
+                    particleColor: b.particleColor || "#fff",
+                    background: b.background || "transparent",  /* Fundo transparente no canvas */
+                    interactive: b.interactive !== undefined ? b.interactive : true,
+                    velocity: this.setVelocity(b.speed),
+                    density: this.setDensity(b.density)
+                };
+                this.init();
+            };
+
+            b.prototype.init = function() {
+                this.k = document.createElement("div");
+                this.i.appendChild(this.k);
+                this.setStyle(this.k, {position: "absolute", top: 0, left: 0, right: 0, bottom: 0, "z-index": 1});
+                this.canvas = document.createElement("canvas");
+                this.i.appendChild(this.canvas);
+                this.g = this.canvas.getContext("2d");
+                this.canvas.width = this.i.size.width;
+                this.canvas.height = this.i.size.height;
+                this.setStyle(this.i, {position: "relative"});
+                this.setStyle(this.canvas, {position: "relative", "z-index": 20});
+                window.addEventListener("resize", function() {
+                    this.canvas.width = this.i.offsetWidth;
+                    this.canvas.height = this.i.offsetHeight;
+                    this.o = [];
+                    for (var a = 0; a < this.canvas.width * this.canvas.height / this.options.density; a++) {
+                        this.o.push(new c(this));
+                    }
+                    this.options.interactive && this.o.push(this.p);
+                    requestAnimationFrame(this.update.bind(this));
+                }.bind(this));
+                this.o = [];
+                for (var a = 0; a < this.canvas.width * this.canvas.height / this.options.density; a++) {
+                    this.o.push(new c(this));
+                }
+                this.options.interactive && (this.p = new c(this), this.p.velocity = {x: 0, y: 0}, this.o.push(this.p), this.canvas.addEventListener("mousemove", function(a) {
+                    this.p.x = a.clientX - this.canvas.offsetLeft;
+                    this.p.y = a.clientY - this.canvas.offsetTop;
+                }.bind(this)));
+                requestAnimationFrame(this.update.bind(this));
+            };
+
+            b.prototype.update = function() {
+                this.g.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                for (var a = 0; a < this.o.length; a++) {
+                    this.o[a].update();
+                    this.o[a].draw();
+                    for (var b = this.o.length - 1; b > a; b--) {
+                        var c = Math.sqrt(Math.pow(this.o[a].x - this.o[b].x, 2) + Math.pow(this.o[a].y - this.o[b].y, 2));
+                        if (c < 120) {
+                            this.g.beginPath();
+                            this.g.strokeStyle = this.options.particleColor;
+                            this.g.globalAlpha = (120 - c) / 120;
+                            this.g.lineWidth = 0.7;
+                            this.g.moveTo(this.o[a].x, this.o[a].y);
+                            this.g.lineTo(this.o[b].x, this.o[b].y);
+                            this.g.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(this.update.bind(this));
+            };
+
+            b.prototype.setVelocity = function(a) {
+                return a === "fast" ? 1 : a === "slow" ? 0.33 : 0.66;
+            };
+
+            b.prototype.setDensity = function(a) {
+                return a === "high" ? 5000 : a === "low" ? 20000 : 10000;
+            };
+
+            b.prototype.setStyle = function(a, b) {
+                for (var c in b) {
+                    a.style[c] = b[c];
+                }
+            };
+
+            a.ParticleNetwork = b;
+        })(window);
+
+        // Inicialização
+        var canvasDiv = document.getElementById('particle-canvas');
+        var options = {
+            particleColor: '#888',
+            background: 'transparent',  /* Fundo transparente no canvas */
+            interactive: true,
+            speed: 'slow',
+            density: 'medium'
+        };
+        var particleCanvas = new ParticleNetwork(canvasDiv, options);
+
+        // Função de início da navegação
         function enterSite() {
             const startScreen = document.querySelector('.start-screen');
             const profiles = document.querySelector('.profiles');
 
             startScreen.style.animation = 'fade-out 1s';
-
-            if (!audioPlayed) {
-                const audio = new Audio('media/song.mp3');
-                audio.play();
-                audioPlayed = true;
-            }
 
             setTimeout(() => {
                 startScreen.style.display = 'none';
