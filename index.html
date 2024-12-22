@@ -85,7 +85,7 @@
         }
 
         #discord-logo {
-            position: absolute;
+            position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
@@ -93,6 +93,7 @@
             height: 50px;
             cursor: pointer;
             transition: transform 0.3s ease-in-out;
+            z-index: 10; /* Certifique-se de que esteja acima do canvas */
         }
 
         #discord-logo:hover {
