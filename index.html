@@ -1,106 +1,128 @@
-<html><head><meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title class="blinking-title">ㅤ</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/main.css">
-<link rel="icon" href="images/heart.png" type="image/png"><script src="js/api.js"></script></head>
+    <title>ㅤ</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Verdana, sans-serif;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
 
+        .start-screen {
+            font-family: Corbel, sans-serif;
+            font-size: 1.5rem;
+            cursor: pointer;
+            animation: fade-in 1s;
+            position: absolute;
+            color: #fff;
+        }
 
-<body>
+        .profiles {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            animation: fade-in 1s;
+            position: absolute;
+        }
+
+        .profile-card {
+            background-color: transparent;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            width: 200px;
+        }
+
+        .profile-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .nickname {
+            font-family: Consolas, monospace;
+        }
+
+        .nickname.primary {
+            font-size: 1.2rem;
+        }
+
+        .nickname.secondary {
+            font-size: 1rem;
+            color: #aaa;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fade-out {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body onclick="enterSite()">
+    <div class="start-screen">.gg/GDjg796Xbp</div>
+
+    <div class="profiles">
+        <div class="profile-card">
+            <img src="https://ibb.co/g7SzNSK" alt="Profile 1">
+            <div class="nickname primary">niel</div>
+            <div class="nickname secondary">530x</div>
+        </div>
+        <div class="profile-card">
+            <img src="https://ibb.co/9vND2XZ" alt="Profile 2">
+            <div class="nickname primary">farewell, my heart</div>
+            <div class="nickname secondary">695y</div>
+        </div>
+        <div class="profile-card">
+            <img src="https://ibb.co/d0Vqs8y" alt="Profile 3">
+            <div class="nickname primary">m0ngler</div>
+            <div class="nickname secondary">301y</div>
+        </div>
+        <div class="profile-card">
+            <img src="https://ibb.co/8PXwGGT" alt="Profile 4">
+            <div class="nickname primary">y71l</div>
+            <div class="nickname secondary">3ye6yyyy</div>
+        </div>
+    </div>
 
     <script>
-        function audioPlay() {
-            var audio = document.getElementById("audio");
-            audio.volume = 0.4;
-            audio.currentTime = 0;
-            audio.play();
+        let audioPlayed = false;
+
+        function enterSite() {
+            const startScreen = document.querySelector('.start-screen');
+            const profiles = document.querySelector('.profiles');
+
+            startScreen.style.animation = 'fade-out 1s';
+
+            if (!audioPlayed) {
+                const audio = new Audio('media/song.mp3');
+                audio.play();
+                audioPlayed = true;
+            }
+
+            setTimeout(() => {
+                startScreen.style.display = 'none';
+                profiles.style.display = 'flex';
+            }, 1000);
         }
     </script>
-    
-    
-    <audio loop="" preload="auto" id="audio">
-        <source src="media/speed.mp3" type="audio/mpeg">
-    </audio>
-    
-    
-<input type="checkbox" autocomplete="off" id="overlay-toggle">
-<div class="overlay fullscreen">
-    <label for="overlay-toggle" onclick="audioPlay(); ">
-        <span class="overlayhover hover" style="font-family: monospace; font-size: 0.6em;">.gg/Fbf88mtWFa</span>
-
-
-
-    </label>
-</div>
-
-
-    <video autoplay="" loop="" muted="">
-        <source src="media/snow.mp4" type="video/mp4">
-        Seu navegador não suporta vídeo.
-    </video>
-
-    <div class="discord-profile">
-        <div class="profile animate__animated animate__fadeInUp animate__fast">
-            <a target="_blank" href="https://discord.com/users/1276331283651493921">
-                <div class="pfp">
-                    <img class="profile-img" data-user-id="1276331283651493921" src="media/pic.png">
-                </div>
-            </a>
-            <div class="nickr" data-user-id="1276331283651493921">niel</div>
-                <div class="nick subnick" data-user-id="1276331283651493921">530x</div>
-            <div class="badges">
-                <div class="badge" style="background-image: url('images/nitro.gif')"></div>
-                <div class="badge" style="background-image: url('images/boosting_1.png')"></div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="discord-profile">
-        <div class="profile animate__animated animate__fadeInUp animate__fast">
-            <a target="_blank" href="https://discord.com/users/1297957756699148420">
-                <div class="pfp">
-                    <img class="profile-img" data-user-id="1297957756699148420" src="media/pic3.png">
-                </div>
-            </a>
-            <div class="nickr" data-user-id="1297957756699148420">farewell, my heart</div>
-            <div class="nick subnick" data-user-id="1297957756699148420">695y</div>
-            <div class="badges">
-                <div class="badge" style="background-image: url('images/nitro.gif')"></div>     
-                <div class="badge" style="background-image: url('images/boosting_1.png')"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="discord-profile">
-        <div class="profile animate__animated animate__fadeInUp animate__fast">
-            <a target="_blank" href="https://discord.com/users/1237977580364234762">
-                <div class="pfp">
-                    <img class="profile-img" data-user-id="1237977580364234762" src="media/pic2.png">
-                </div>
-            </a>
-            <div class="nickr" data-user-id="1237977580364234762">m0ngler</div>
-            <div class="nick subnick" data-user-id="1237977580364234762">301y</div>
-            <div class="badges">
-                 <div class="badge" style="background-image: url('images/nitro.gif')"></div>
-                <div class="badge" style="background-image: url('images/boosting_1.png')"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="discord-profile">
-        <div class="profile animate__animated animate__fadeInUp animate__fast">
-            <a target="_blank" href="https://discord.com/users/715365964836896778">
-                <div class="pfp">
-                    <img class="profile-img" data-user-id="715365964836896778" src="media/pic5.png">
-                </div>
-            </a>
-            <div class="nickr" data-user-id="715365964836896778">y71l</div>
-            <div class="nick subnick" data-user-id="715365964836896778">3ye6yyyy</div>
-            <div class="badges">
-                 <div class="badge" style="background-image: url('images/nitro.gif')"></div>
-                <div class="badge" style="background-image: url('images/boosting_1.png')"></div>
-            </div>
-        </div>
-    </div>
-    
-</body></html>
+</body>
+</html>
