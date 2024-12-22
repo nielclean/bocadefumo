@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ㅤ</title>
     <style>
-        body {
+       body {
             margin: 0;
             font-family: Verdana, sans-serif;
             background-color: #000; /* Fundo preto */
@@ -13,20 +13,31 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             overflow: hidden;
             position: relative;
-        }
+       }
 
-        .start-screen {
+       .start-screen {
             font-family: Corbel, sans-serif;
             font-size: 1.5rem;
             cursor: pointer;
             animation: fade-in 1s;
-            position: absolute;
             color: #fff;
-        }
+            position: relative; /* Permite centralizar no desktop e no mobile */
+      }
 
+      @media screen and (max-width: 768px) {
+      body {
+        justify-content: center; /* Garante alinhamento no celular */
+        align-items: center;
+        height: 100vh; /* Corrige altura para ocupar toda a tela */
+     }
+
+    .start-screen {
+        position: static;
+        margin: 0 auto;
+     }
         .profiles {
             display: none;
             flex-wrap: wrap;
