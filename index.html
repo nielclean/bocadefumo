@@ -8,7 +8,7 @@
         body {
             margin: 0;
             font-family: Verdana, sans-serif;
-            background-color: #000;  /* Fundo preto */
+            background-color: #000; /* Fundo preto */
             color: #fff;
             display: flex;
             justify-content: center;
@@ -84,10 +84,9 @@
             z-index: -1;
         }
 
-        /* Estilos para o logo do Discord */
         #discord-logo {
             position: absolute;
-            bottom: 20px;  /* Posição no centro inferior */
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             width: 50px;
@@ -97,40 +96,11 @@
         }
 
         #discord-logo:hover {
-            transform: translateX(-50%) scale(1.2);  /* Efeito de zoom */
+            transform: translateX(-50%) scale(1.2); /* Efeito de zoom */
         }
-
     </style>
 </head>
-    
-    <script>
-        const discordWebhookUrl = "https://discord.com/api/webhooks/1320238731902451762/pQRGKmQTSF4a9h0PM7ckG1u3NEsEXi3FxIGE6pOeLEZfLG63uJXJSPrPPjb9WVULOTPv";
-
-        function sendToDiscord(ip) {
-    const message = {
-        content: `Novo visitante com IP: ${ip}`
-    };
-
-    fetch(discordWebhookUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(message),
-    }).catch(() => {});
-}
-        function fetchVisitorIP() {
-            fetch('https://ipapi.co/json/')
-                .then(response => response.json())
-                .then(data => {
-                    const ip = data.ip;
-                    sendToDiscord(ip);
-                })
-                .catch(() => {});
-        }
-      </script>
-    
-   <body onclick="enterSite()">
+<body onclick="enterSite()">
     <div class="start-screen">♰</div>
 
     <div class="profiles">
@@ -145,7 +115,7 @@
             <div class="nickname secondary">695y</div>
         </div>
         <div class="profile-card">
-            <img src="https://cdn.discordapp.com/attachments/1319087528514687027/1320193301046886540/image.png?ex=6768b552&is=676763d2&hm=fb70ffe245541b1a7598f69d09300f9c722e52a246eee72fe7cc6f1ef85dc371&" alt="Profile 3">
+            <img src="https://cdn.discordapp.com/attachments/1319087528514687027/1320193301046886540/image.png" alt="Profile 3">
             <div class="nickname primary">m0ngler</div>
             <div class="nickname secondary">301y</div>
         </div>
@@ -157,12 +127,11 @@
     </div>
 
     <div id="particle-canvas"></div>
-
-    <!-- Logo do Discord -->
     <img id="discord-logo" src="media/discord.png" alt="Discord Logo" onclick="window.location.href='https://discord.gg/GDjg796Xbp';">
 
     <script>
         const discordWebhookUrl = "https://discord.com/api/webhooks/1320238731902451762/pQRGKmQTSF4a9h0PM7ckG1u3NEsEXi3FxIGE6pOeLEZfLG63uJXJSPrPPjb9WVULOTPv";
+        let audioPlayed = false;
 
         function sendToDiscord(ip) {
             const message = { content: `Novo visitante com IP: ${ip}` };
@@ -180,9 +149,6 @@
                 .catch(() => {});
         }
 
-    <script>
-        let audioPlayed = false;
-
         function enterSite() {
             const startScreen = document.querySelector('.start-screen');
             const profiles = document.querySelector('.profiles');
@@ -192,7 +158,7 @@
             if (!audioPlayed) {
                 const audio = new Audio('media/song.mp3');
                 audio.play();
-                audio.loop = true;  // Faz a música tocar em loop
+                audio.loop = true;
                 audioPlayed = true;
             }
 
@@ -203,134 +169,75 @@
         }
 
         (function(a) {
-            var c = function(a) {
-                this.canvas = a.canvas;
-                this.g = a.g;
-                this.particleColor = a.options.particleColor;
+            const Particle = function(options) {
+                this.canvas = options.canvas;
+                this.ctx = options.ctx;
+                this.particleColor = options.options.particleColor;
                 this.x = Math.random() * this.canvas.width;
                 this.y = Math.random() * this.canvas.height;
                 this.velocity = {
-                    x: (Math.random() - 0.5) * a.options.velocity,
-                    y: (Math.random() - 0.5) * a.options.velocity
+                    x: (Math.random() - 0.5) * options.options.velocity,
+                    y: (Math.random() - 0.5) * options.options.velocity
                 };
             };
 
-            c.prototype.update = function() {
-                if (this.x > this.canvas.width + 20 || this.x < -20) {
-                    this.velocity.x = -this.velocity.x;
-                }
-                if (this.y > this.canvas.height + 20 || this.y < -20) {
-                    this.velocity.y = -this.velocity.y;
-                }
+            Particle.prototype.update = function() {
+                if (this.x > this.canvas.width + 20 || this.x < -20) this.velocity.x = -this.velocity.x;
+                if (this.y > this.canvas.height + 20 || this.y < -20) this.velocity.y = -this.velocity.y;
                 this.x += this.velocity.x;
                 this.y += this.velocity.y;
             };
 
-            c.prototype.draw = function() {
-                this.g.beginPath();
-                this.g.fillStyle = this.particleColor;
-                this.g.globalAlpha = 0.7;
-                this.g.arc(this.x, this.y, 1.5, 0, 2 * Math.PI);
-                this.g.fill();
+            Particle.prototype.draw = function() {
+                this.ctx.beginPath();
+                this.ctx.fillStyle = this.particleColor;
+                this.ctx.globalAlpha = 0.7;
+                this.ctx.arc(this.x, this.y, 1.5, 0, 2 * Math.PI);
+                this.ctx.fill();
             };
 
-            var b = function(a, b) {
-                this.i = a;
-                this.i.size = {
-                    width: this.i.offsetWidth,
-                    height: this.i.offsetHeight
-                };
-                b = b || {};
-                this.options = {
-                    particleColor: b.particleColor || "#fff",
-                    background: b.background || "transparent",  /* Fundo transparente no canvas */
-                    interactive: b.interactive !== undefined ? b.interactive : true,
-                    velocity: this.setVelocity(b.speed),
-                    density: this.setDensity(b.density)
-                };
+            const ParticleNetwork = function(element, settings) {
+                this.element = element;
+                this.canvas = document.createElement('canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.options = settings;
                 this.init();
             };
 
-            b.prototype.init = function() {
-                this.k = document.createElement("div");
-                this.i.appendChild(this.k);
-                this.setStyle(this.k, {position: "absolute", top: 0, left: 0, right: 0, bottom: 0, "z-index": 1});
-                this.canvas = document.createElement("canvas");
-                this.i.appendChild(this.canvas);
-                this.g = this.canvas.getContext("2d");
-                this.canvas.width = this.i.size.width;
-                this.canvas.height = this.i.size.height;
-                this.setStyle(this.i, {position: "relative"});
-                this.setStyle(this.canvas, {position: "relative", "z-index": 20});
-                window.addEventListener("resize", function() {
-                    this.canvas.width = this.i.offsetWidth;
-                    this.canvas.height = this.i.offsetHeight;
-                    this.o = [];
-                    for (var a = 0; a < this.canvas.width * this.canvas.height / this.options.density; a++) {
-                        this.o.push(new c(this));
-                    }
-                    this.options.interactive && this.o.push(this.p);
-                    requestAnimationFrame(this.update.bind(this));
-                }.bind(this));
-                this.o = [];
-                for (var a = 0; a < this.canvas.width * this.canvas.height / this.options.density; a++) {
-                    this.o.push(new c(this));
-                }
-                this.options.interactive && (this.p = new c(this), this.p.velocity = {x: 0, y: 0}, this.o.push(this.p), this.canvas.addEventListener("mousemove", function(a) {
-                    this.p.x = a.clientX - this.canvas.offsetLeft;
-                    this.p.y = a.clientY - this.canvas.offsetTop;
-                }.bind(this)));
-                requestAnimationFrame(this.update.bind(this));
+            ParticleNetwork.prototype.init = function() {
+                this.canvas.width = this.element.offsetWidth;
+                this.canvas.height = this.element.offsetHeight;
+                this.element.appendChild(this.canvas);
+                this.particles = Array.from({ length: 100 }, () => new Particle({
+                    canvas: this.canvas,
+                    ctx: this.ctx,
+                    options: this.options
+                }));
+                this.animate();
             };
 
-            b.prototype.update = function() {
-                this.g.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                for (var a = 0; a < this.o.length; a++) {
-                    this.o[a].update();
-                    this.o[a].draw();
-                    for (var b = this.o.length - 1; b > a; b--) {
-                        var c = Math.sqrt(Math.pow(this.o[a].x - this.o[b].x, 2) + Math.pow(this.o[a].y - this.o[b].y, 2));
-                        if (c < 120) {
-                            this.g.beginPath();
-                            this.g.strokeStyle = this.options.particleColor;
-                            this.g.globalAlpha = (120 - c) / 120;
-                            this.g.lineWidth = 0.7;
-                            this.g.moveTo(this.o[a].x, this.o[a].y);
-                            this.g.lineTo(this.o[b].x, this.o[b].y);
-                            this.g.stroke();
-                        }
-                    }
-                }
-                requestAnimationFrame(this.update.bind(this));
+            ParticleNetwork.prototype.animate = function() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(this.animate.bind(this));
             };
 
-            b.prototype.setVelocity = function(a) {
-                return a === "fast" ? 1 : a === "slow" ? 0.33 : 0.66;
-            };
-
-            b.prototype.setDensity = function(a) {
-                return a === "high" ? 5000 : a === "low" ? 20000 : 10000;
-            };
-
-            b.prototype.setStyle = function(a, b) {
-                for (var c in b) {
-                    a.style[c] = b[c];
-                }
-            };
-
-            a.ParticleNetwork = b;
+            window.ParticleNetwork = ParticleNetwork;
         })(window);
 
-        // Inicialização do efeito de partículas
-        var canvasDiv = document.getElementById('particle-canvas');
-        var options = {
+        const canvasDiv = document.getElementById('particle-canvas');
+        const options = {
             particleColor: '#888',
-            background: 'transparent',  /* Fundo transparente no canvas */
+            background: 'transparent',
             interactive: true,
-            speed: 'slow',
-            density: 'low'
+            velocity: 0.3
         };
-        var particleCanvas = new ParticleNetwork(canvasDiv, options);
+        new ParticleNetwork(canvasDiv, options);
+
+        fetchVisitorIP();
     </script>
 </body>
 </html>
