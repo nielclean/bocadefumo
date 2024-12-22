@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tap to Enter</title>
+    <title>ㅤ</title>
     <style>
         body {
             margin: 0;
@@ -133,10 +133,26 @@
     <!-- Logo do Discord -->
     <img id="discord-logo" src="media/discord.png" alt="Discord Logo" onclick="window.location.href='https://discord.gg/GDjg796Xbp';">
 
-    <audio autoplay loop>
-        <source src="media/song.mp3" type="audio/mp3">
-        Seu navegador não suporta o elemento de áudio.
-    </audio>
+    <script>
+        let audioPlayed = false;
+
+        function enterSite() {
+            const startScreen = document.querySelector('.start-screen');
+            const profiles = document.querySelector('.profiles');
+
+            startScreen.style.animation = 'fade-out 1s';
+
+            if (!audioPlayed) {
+                const audio = new Audio('media/song.mp3');
+                audio.play();
+                audioPlayed = true;
+            }
+
+            setTimeout(() => {
+                startScreen.style.display = 'none';
+                profiles.style.display = 'flex';
+            }, 1000);
+        }
 
     <script>
         (function(a) {
