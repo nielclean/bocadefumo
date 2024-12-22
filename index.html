@@ -101,14 +101,46 @@
 
         @media screen and (max-width: 768px) {
             body {
-                overflow-y: auto; /* Permite rolagem vertical */
-                height: auto; /* Remove a restrição de altura */
+                overflow-y: auto;
+                height: auto;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
             }
-        
+
+            .start-screen {
+                position: static;
+                margin-top: 20px;
+                text-align: center;
+            }
+
             .profiles {
-                max-height: 100vh; /* Limita a altura ao tamanho da viewport */
-                overflow-y: auto; /* Ativa a rolagem dentro do container de perfis */
+                max-height: 100vh;
+                overflow-y: auto;
+                margin-top: 20px;
             }
+
+            body::-webkit-scrollbar,
+            .profiles::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            body::-webkit-scrollbar-thumb,
+            .profiles::-webkit-scrollbar-thumb {
+                background: #555;
+                border-radius: 3px;
+            }
+
+            body::-webkit-scrollbar-thumb:hover,
+            .profiles::-webkit-scrollbar-thumb:hover {
+                background: #777;
+            }
+
+            body::-webkit-scrollbar-track,
+            .profiles::-webkit-scrollbar-track {
+                background: #222;
+            }
+        }
         }
     </style>
 </head>
