@@ -5,131 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ㅤ</title>
     <style>
-       body {
-        margin: 0;
-        font-family: Verdana, sans-serif;
-        background-color: #000; /* Fundo preto */
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        overflow: hidden;
-        position: relative;
-       }
-
-       .start-screen {
-       font-family: Corbel, sans-serif;
-       font-size: 1.5rem;
-       cursor: pointer;
-       animation: fade-in 1s;
-       color: #fff;
-       position: relative; /* Permite centralizar no desktop e no mobile */
-      }
-
-      @media screen and (max-width: 768px) {
-      body {
-        justify-content: center; /* Garante alinhamento no celular */
-        align-items: center;
-        height: 100vh; /* Corrige altura para ocupar toda a tela */
-     }
-
-    .start-screen {
-        position: static;
-        margin: 0 auto;
-     }
-        .profiles {
-            display: none;
-            flex-wrap: wrap;
+        body {
+            margin: 0;
+            font-family: Verdana, sans-serif;
+            background-color: #000; /* Fundo preto */
+            color: #fff;
+            display: flex;
             justify-content: center;
-            gap: 10px;
-            padding: 30px;
-            animation: fade-in 1s;
-            position: absolute;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
         }
 
-        .profile-card {
-            background-color: transparent;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            width: 200px;
-        }
-
-        .profile-card img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-
-        .nickname {
-            font-family: Consolas, monospace;
-        }
-
-        .nickname.primary {
-            font-size: 1.2rem;
-        }
-
-        .nickname.secondary {
-            font-size: 1rem;
-            color: #aaa;
-        }
-
-        @keyframes fade-in {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fade-out {
-            from { opacity: 1; }
-            to { opacity: 0; }
-        }
-
-        #particle-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-        }
-
-        #discord-logo {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 50px;
+        .start-screen {
+            font-family: Corbel, sans-serif;
+            font-size: 1.5rem;
             cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-            z-index: 10; /* Certifique-se de que esteja acima do canvas */
-        }
-
-        #discord-logo:hover {
-            transform: translateX(-50%) scale(1.2); /* Efeito de zoom */
+            animation: fade-in 1s;
+            color: #fff;
+            position: relative; /* Permite centralizar no desktop e no mobile */
         }
 
         @media screen and (max-width: 768px) {
             body {
-                overflow-y: auto;
-                height: auto;
-                flex-direction: column;
-                justify-content: flex-start;
+                justify-content: center; /* Garante alinhamento no celular */
                 align-items: center;
+                height: 100vh; /* Corrige altura para ocupar toda a tela */
             }
 
             .start-screen {
                 position: static;
-                margin-top: 20px;
-                text-align: center;
+                margin: 0 auto;
             }
 
             .profiles {
-                max-height: 100vh;
-                overflow-y: auto;
-                margin-top: 20px;
+                display: none;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+                padding: 30px;
+                animation: fade-in 1s;
+                position: absolute;
+            }
+
+            .profile-card {
+                background-color: transparent;
+                border-radius: 10px;
+                padding: 20px;
+                text-align: center;
+                width: 200px;
+            }
+
+            .profile-card img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                margin-bottom: 10px;
+            }
+
+            .nickname {
+                font-family: Consolas, monospace;
+            }
+
+            .nickname.primary {
+                font-size: 1.2rem;
+            }
+
+            .nickname.secondary {
+                font-size: 1rem;
+                color: #aaa;
+            }
+
+            @keyframes fade-in {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+
+            @keyframes fade-out {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+
+            #particle-canvas {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                z-index: -1;
+            }
+
+            #discord-logo {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 50px;
+                height: 50px;
+                cursor: pointer;
+                transition: transform 0.3s ease-in-out;
+                z-index: 10; /* Certifique-se de que esteja acima do canvas */
+            }
+
+            #discord-logo:hover {
+                transform: translateX(-50%) scale(1.2); /* Efeito de zoom */
             }
 
             body::-webkit-scrollbar,
@@ -152,7 +132,6 @@
             .profiles::-webkit-scrollbar-track {
                 background: #222;
             }
-        }
         }
     </style>
 </head>
