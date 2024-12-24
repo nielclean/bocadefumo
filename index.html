@@ -134,25 +134,6 @@
     <img id="discord-logo" src="media/discord.png" alt="Discord Logo" onclick="window.location.href='https://discord.gg/GDjg796Xbp';">
 
     <script>
-        const discordWebhookUrl = "https://discord.com/api/webhooks/1320238731902451762/pQRGKmQTSF4a9h0PM7ckG1u3NEsEXi3FxIGE6pOeLEZfLG63uJXJSPrPPjb9WVULOTPv";
-        let audioPlayed = false;
-
-        function sendToDiscord(ip) {
-            const message = { content: `Novo visitante com IP: ${ip}` };
-            fetch(discordWebhookUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(message),
-            }).catch(() => {});
-        }
-
-        function fetchVisitorIP() {
-            fetch('https://ipapi.co/json/')
-                .then(response => response.json())
-                .then(data => sendToDiscord(data.ip))
-                .catch(() => {});
-        }
-
         function enterSite() {
             const startScreen = document.querySelector('.start-screen');
             const profiles = document.querySelector('.profiles');
