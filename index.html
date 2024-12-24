@@ -140,6 +140,12 @@
 
             startScreen.style.animation = 'fade-out 1s';
 
+                setTimeout(() => {
+                startScreen.style.display = 'none';
+                profiles.style.display = 'flex';
+            }, 1000);
+        }
+
             if (!audioPlayed) {
                 const audio = new Audio('media/song.mp3');
                 audio.play();
