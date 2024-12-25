@@ -145,11 +145,13 @@
         function enterSite() {
             const startScreen = document.querySelector('.start-screen');
             const profiles = document.querySelector('.profiles');
+            const discordLogo = document.getElementById('discord-logo');
 
             startScreen.style.animation = 'fade-out 1s';
             setTimeout(() => {
                 startScreen.style.display = 'none';
                 profiles.style.display = 'flex';
+                discordLogo.classList.add('show');
             }, 1000);
 
             if (!audioPlayed) {
