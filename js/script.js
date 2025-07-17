@@ -7,6 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const profile = createprofile(0, userLink);
       const profileContainer = document.querySelector('.profile-container');
       profileContainer.appendChild(profile);
+
+      const connectedAccounts = data.connected_accounts || [];
+
+      // Adiciona manualmente as redes
+      connectedAccounts.push({ type: 'tiktok', name: 'nogamblenocrypto' });
+      connectedAccounts.push({ type: 'instagram', name: 'outfest' });
+
       atualizarprofile(0, {
         user: {
           id: data.discord_user.id,
@@ -15,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
           global_name: data.discord_user.global_name,
         },
         badges: data.public_flags_array || [],
-        connected_accounts: data.connected_accounts || []
+        connected_accounts: connectedAccounts
       });
     });
 });
