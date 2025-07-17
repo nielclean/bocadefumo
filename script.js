@@ -1,27 +1,20 @@
-// ========== PARTICLE BACKGROUND ==========
-particlesJS.load('particles-js', 'particles.json', function () {
+// Partículas
+particlesJS.load('particles-js', 'particles.json', () => {
   console.log('Particles loaded.');
 });
 
-// ========== DISCORD LANYARD ==========
+// Discord Lanyard
 const userId = '1355225924018245796';
 const apiUrl = `https://api.lanyard.rest/v1/users/${userId}`;
 
 function updateProfile(data) {
   const user = data.discord_user;
-  const discordStatus = data.discord_status;
-  const customStatus = data.activities.find(a => a.type === 4); // Tipo 4 = Custom Status
-
-  // Avatar URL
   const avatarUrl = user.avatar
     ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=512`
     : 'images/avatar.png';
 
   document.getElementById('avatar').src = avatarUrl;
   document.getElementById('username').textContent = `${user.username}#${user.discriminator}`;
-  // Opcional mostrar status:
-  // document.getElementById('status').textContent = `Status: ${discordStatus}`;
-  // document.getElementById('custom-status').textContent = customStatus ? customStatus.state : '';
 }
 
 fetch(apiUrl)
@@ -29,11 +22,9 @@ fetch(apiUrl)
   .then(json => {
     if (json.success) updateProfile(json.data);
   })
-  .catch(err => {
-    console.error('Failed to fetch Lanyard data:', err);
-  });
+  .catch(err => console.error('Failed to fetch Lanyard data:', err));
 
-// ========== VIEW COUNTER ==========
+// View counter
 const viewKey = 'profile_views';
 let views = localStorage.getItem(viewKey);
 if (!views) views = 0;
@@ -41,7 +32,7 @@ views++;
 localStorage.setItem(viewKey, views);
 document.getElementById('view-count').textContent = views;
 
-// ========== AUDIO CONTROLLER ==========
+// Áudio
 const audio = document.getElementById('bg-audio');
 const btn = document.getElementById('audio-btn');
 
@@ -55,7 +46,7 @@ btn.addEventListener('click', () => {
   }
 });
 
-// ========== CARD PARALLAX EFFECT ==========
+// Parallax intenso
 const card = document.querySelector('.profile-card');
 
 card.addEventListener('mousemove', (e) => {
@@ -66,11 +57,10 @@ card.addEventListener('mousemove', (e) => {
   const offsetX = (x / rect.width) * 2 - 1;
   const offsetY = (y / rect.height) * 2 - 1;
 
-  // Efeito parallax mais intenso
-  const rotateX = offsetY * 15; // 15 graus
-  const rotateY = offsetX * 15;
+  const rotateX = offsetY * 20;
+  const rotateY = offsetX * 20;
 
-  card.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.1)`;
+  card.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.08)`;
 });
 
 card.addEventListener('mouseleave', () => {
