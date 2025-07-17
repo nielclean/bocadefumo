@@ -5,7 +5,6 @@ body, html {
   background-color: #000;
   font-family: 'Comfortaa', cursive;
   color: white;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,6 +19,7 @@ body, html {
   top: 0;
   left: 0;
   z-index: 1;
+  pointer-events: none;
 }
 
 /* Card menor e central */
@@ -32,12 +32,15 @@ body, html {
   transition: 0.4s ease;
   transform-style: preserve-3d;
   z-index: 10;
+  will-change: transform;
+  perspective: 1000px;
 }
 
 .profile-card:hover {
   background: rgba(20, 20, 20, 0.7);
   box-shadow: 0 0 60px rgba(255, 255, 255, 0.4);
   border: 1px solid rgba(255,255,255,0.3);
+  transform: rotateY(8deg) rotateX(8deg); /* Parallax mais intenso */
 }
 
 /* Avatar */
