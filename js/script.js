@@ -1,18 +1,24 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
-  fetch(`https://ogp.wtf/api/thestars`).then(res => res.json().then(json => {
-    json.forEach((user, index) => {
-      const userLink = `https://discord.com/users/${user.user.id}/`;
-      const profile = createprofile(index, userLink);
+  const userId = '1355225924018245796';
+  fetch(`https://api.lanyard.rest/v1/users/${userId}`)
+    .then(res => res.json())
+    .then(({ data }) => {
+      const userLink = `https://discord.com/users/${data.discord_user.id}/`;
+      const profile = createprofile(0, userLink);
       const profileContainer = document.querySelector('.profile-container');
       profileContainer.appendChild(profile);
-      setTimeout(() => {
-        atualizarprofile(index, user);
-      }, 100 * index);
-    })
-  }))
-})
+      atualizarprofile(0, {
+        user: {
+          id: data.discord_user.id,
+          username: data.discord_user.username,
+          avatar: data.discord_user.avatar,
+          global_name: data.discord_user.global_name,
+        },
+        badges: data.public_flags_array || [],
+        connected_accounts: data.connected_accounts || []
+      });
+    });
+});
 function atualizarprofile(index, userData) {
 
   const imgElement = document.getElementById(`avatar${index + 1}`);
