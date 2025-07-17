@@ -56,8 +56,12 @@ body, html {
   font-weight: 600;
 }
 
-/* Status e custom status */
-#status,
+/* Status antigo (escondido) */
+#status {
+  display: none;
+}
+
+/* Custom status */
 #custom-status {
   font-size: 0.9em;
   color: #aaa;
@@ -67,19 +71,21 @@ body, html {
 /* Ícones sociais */
 .socials {
   margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
-.social-icon {
-  font-size: 1.4em;
-  margin: 0 10px;
-  color: #fff;
-  text-decoration: none;
-  transition: transform 0.2s ease;
+.social-icon img {
+  width: 28px;
+  height: 28px;
+  filter: brightness(1);
+  transition: filter 0.3s ease, transform 0.3s ease;
 }
 
-.social-icon:hover {
-  transform: scale(1.2);
-  color: #1da1f2;
+.social-icon:hover img {
+  filter: brightness(0.7);
+  transform: scale(1.1);
 }
 
 /* Botão de áudio */
@@ -115,8 +121,8 @@ body, html {
   backdrop-filter: blur(5px);
 }
 
-.view-icon {
-  width: 20px;
-  height: 20px;
-  filter: brightness(0.9);
+.views .view-icon {
+  width: 28px;
+  height: 28px;
+  filter: brightness(1);
 }
