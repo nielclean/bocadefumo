@@ -8,7 +8,7 @@
 body, html {
   height: 100%;
   width: 100%;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comfortaa', cursive, sans-serif;
   background-color: #0d0d0d;
   color: #fff;
   overflow: hidden;
@@ -82,13 +82,6 @@ body, html {
   color: #1da1f2;
 }
 
-/* Views */
-.views {
-  margin-top: 15px;
-  font-size: 0.85em;
-  color: #888;
-}
-
 /* Botão de áudio */
 #audio-btn {
   margin-top: 10px;
@@ -104,6 +97,7 @@ body, html {
   transform: scale(1.2);
 }
 
+/* Contador de views com ícone - canto superior direito */
 .views {
   position: fixed;
   top: 20px;
@@ -126,4 +120,3 @@ body, html {
   height: 20px;
   filter: brightness(0.9);
 }
-
