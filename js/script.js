@@ -39,6 +39,7 @@ function atualizarprofileLanyard(index, data) {
   } else {
     conns.textContent = 'Nenhuma conexão ativa.';
   }
+  document.querySelectorAll('.profile')[index].classList.add('loaded');
 }
 
 
