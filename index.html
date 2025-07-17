@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discord Profile</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="images/avatar.png" type="image/png" />
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <div class="profile-card">
+    <img id="avatar" src="images/avatar.png" alt="Avatar" class="avatar" />
+    <h1 id="username">Loading...</h1>
+    <p id="status">Status: ...</p>
+    <p id="custom-status"></p>
+
+    <div class="socials">
+      <a href="https://tiktok.com/@yourusername" target="_blank" class="social-icon">🎵</a>
+      <a href="https://instagram.com/yourusername" target="_blank" class="social-icon">📸</a>
+    </div>
+
+    <p class="views">Views: <span id="view-count">0</span></p>
+
+    <button id="audio-btn">🔊</button>
+    <audio id="bg-audio" src="media/music.mp3" loop></audio>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
