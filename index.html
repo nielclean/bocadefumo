@@ -8,8 +8,16 @@
   <link rel="icon" href="images/avatar.png" type="image/png" />
 </head>
 <body>
+  <!-- Partículas -->
   <div id="particles-js"></div>
 
+  <!-- Contador de Views no topo direito -->
+  <div class="views">
+    <img src="https://img.icons8.com/ios-glyphs/30/visible--v2.png" alt="Views" class="view-icon" />
+    <span id="view-count">0</span>
+  </div>
+
+  <!-- Cartão do Perfil -->
   <div class="profile-card">
     <img id="avatar" src="images/avatar.png" alt="Avatar" class="avatar" />
     <h1 id="username">Loading...</h1>
@@ -21,12 +29,11 @@
       <a href="https://instagram.com/yourusername" target="_blank" class="social-icon">📸</a>
     </div>
 
-    <p class="views">Views: <span id="view-count">0</span></p>
-
     <button id="audio-btn">🔊</button>
     <audio id="bg-audio" src="media/music.mp3" loop></audio>
   </div>
 
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script src="script.js"></script>
 </body>
