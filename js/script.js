@@ -1,136 +1,53 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const ids = ['1355225924018245796', '865792844212207636'];
+document.addEventListener('DOMContentLoaded', async () => {
+  const usersIds = ['1355225924018245796', '865792844212207636'];
+  const profileContainer = document.querySelector('.profile-container');
 
-  Promise.all(
-    ids.map(id =>
-      fetch(`https://api.lanyard.rest/v1/users/${id}`).then(res => res.json())
-    )
-  ).then(responses => {
-    responses.forEach((response, index) => {
-      const user = response.data;
-      const userLink = `https://discord.com/users/${user.discord_user.id}`;
-      const profile = createprofile(index, userLink);
-      document.querySelector('.profile-container').appendChild(profile);
-      setTimeout(() => {
-        atualizarprofile(index, user);
-      }, 100 * index);
-    });
-  });
-});
-
-function extractBadgesFromFlags(flags, legacy_username) {
-  const badgeMap = {
-    1: "staff",
-    2: "partner",
-    4: "hypesquad",
-    8: "bug_hunter_level_1",
-    64: "hypesquad_house_1",
-    128: "hypesquad_house_2",
-    256: "hypesquad_house_3",
-    512: "premium",
-    16384: "bug_hunter_level_2",
-    65536: "verified_developer",
-    131072: "certified_moderator",
-    4194304: "active_developer",
-    1073741824: "legacy_username"
+  const connections = {
+    instagram: {
+      icon: "<img class='conn-icon' src='images/connections/instagram.svg'>",
+      link: 'https://www.instagram.com/',
+      user: true
+    },
+    discord: {
+      icon: "<img class='conn-icon' src='images/connections/discord.svg'>",
+      link: 'https://discord.com/users/',
+      user: true
+    },
+    tiktok: {
+      icon: "<img class='conn-icon' src='images/connections/tiktok.svg'>",
+      link: 'https://www.tiktok.com/@',
+      user: true
+    }
   };
 
-  const badges = [];
+  for (let i = 0; i < usersIds.length; i++) {
+    const id = usersIds[i];
+    const userLink = `https://discord.com/users/${id}`;
+    const profile = createProfile(i, userLink);
+    profileContainer.appendChild(profile);
 
-  for (const bit in badgeMap) {
-    if ((flags & bit) != 0) {
-      badges.push({ id: badgeMap[bit], legacy_username });
+    try {
+      const res = await fetch(`https://api.lanyard.rest/v1/users/${id}`);
+      const data = await res.json();
+      if (data.success) {
+        updateProfile(i, data.data, connections);
+      } else {
+        console.warn('Lanyard API error for user', id);
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
     }
   }
+});
 
-  return badges;
-}
-
-function atualizarprofile(index, userData) {
-  const user = userData.discord_user;
-
-  const imgElement = document.getElementById(`avatar${index + 1}`);
-  const nameElement = document.getElementById(`name${index + 1}`);
-  const tagElement = document.createElement('p');
-  const flagsElement = document.getElementById(`flags${index + 1}`);
-  const connsElement = document.getElementById(`conns${index + 1}`);
-
-  tagElement.className = 'tag';
-
-  const avatarUrl = user.avatar?.startsWith('a_')
-    ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.gif`
-    : user.avatar
-      ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
-      : `https://cdn.discordapp.com/embed/avatars/1.png`;
-
-  tagElement.textContent = `@${user.username}`;
-  imgElement.src = avatarUrl;
-  nameElement.textContent = user.global_name || user.username || ' ';
-  nameElement.appendChild(tagElement);
-
-  // Badges
-  const flags = extractBadgesFromFlags(user.public_flags, user.legacy_username);
-  const badgeIcons = {
-    staff: 'https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/discordstaff.svg',
-    partner: 'https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/discordpartner.svg',
-    hypesquad: 'https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/hypesquadevents.svg',
-    bug_hunter_level_1: 'https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/discordbughunter1.svg',
-    hypesquad_house_1: 'https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/hypesquadbravery.svg',
-    hypesquad_house_2: 'https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/hypesquadbrilliance.svg',
-    hypesquad_house_3: 'https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/hypesquadbalance.svg',
-    premium: 'https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/discordnitro.svg',
-    bug_hunter_level_2: 'https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/discordbughunter2.svg',
-    verified_developer: 'https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/discordbotdev.svg',
-    certified_moderator: 'https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/discordmod.svg',
-    active_developer: 'https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/activedeveloper.svg',
-    legacy_username: 'https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/username.png',
-  };
-
-  flagsElement.innerHTML = flags.length > 0
-    ? flags.map(flag => {
-        const icon = badgeIcons[flag.id];
-        const title = flag.id === "legacy_username" ? `Originalmente ${flag.legacy_username}` : flag.id.replace(/_/g, ' ');
-        return `<div class="tooltip"><img class='flag-icon' src='${icon}' title='${title}'><span class="tooltiptext">${title}</span></div>`;
-      }).join('')
-    : `<img class='flag-icon' src='https://ogp.wtf/assets/connections/invis.png' alt=' '>`;
-
-  // Conexões (pode adicionar outras se quiser)
-  const conns = userData.connected_accounts || [];
-  connsElement.className = conns.length > 0 ? 'conn-container' : 'conn-container no-connections';
-
-  const connIcons = {
-    spotify: { icon: 'https://ogp.wtf/assets/connections/spotify.svg', link: 'https://open.spotify.com/user/' },
-    github: { icon: 'https://ogp.wtf/assets/connections/github.svg', link: 'https://github.com/' },
-    twitter: { icon: './assets/twitter.png', link: 'https://twitter.com/' },
-    instagram: { icon: './assets/instagram.png', link: 'https://www.instagram.com/' },
-    discord: { icon: './assets/discord.svg', link: 'https://discord.com/users/' },
-  };
-
-  connsElement.innerHTML = conns.length > 0
-    ? conns.map(conn => {
-        const type = conn.type.toLowerCase();
-        if (!(type in connIcons)) return '';
-        const { icon, link } = connIcons[type];
-        const username = type === 'discord' ? user.id : conn.name;
-        return `<a href="${link}${username}" target="_blank" class="tooltip"><img class='conn-icon' src='${icon}'><span class="tooltiptext">${conn.name}</span></a>`;
-      }).join(' ')
-    : `<img class='conn-icon' src='https://ogp.wtf/assets/connections/invis.png' alt=' '>`;
-
-
-  imgElement.addEventListener('load', () => {
-    const profileElement = document.querySelector(`.profile:nth-child(${index + 1})`);
-    profileElement?.classList.add('loaded');
-  });
-}
-
-function createprofile(index, userLink) {
+function createProfile(index, userLink) {
   const profile = document.createElement('div');
   profile.className = 'profile';
 
   const link = document.createElement('a');
   link.href = userLink;
-  link.target = "_blank";
-  link.title = `Clique para ir para o profile.`;
+  link.target = '_blank';
+  link.title = `Clique para ir para o perfil.`;
 
   const avatar = document.createElement('img');
   avatar.id = `avatar${index + 1}`;
@@ -155,6 +72,7 @@ function createprofile(index, userLink) {
   nameContainer.appendChild(nameParagraph);
   nameContainer.appendChild(flagsParagraph);
   nameContainer.appendChild(connsParagraph);
+
   profile.appendChild(link);
   profile.appendChild(nameContainer);
 
@@ -171,55 +89,88 @@ function createprofile(index, userLink) {
   return profile;
 }
 
-function removeOverlay() {
-  var overlay = document.querySelector('.black-overlay');
-  Musica();
-  overlay.style.transition = 'opacity 1s';
-  overlay.style.opacity = '0';
-  setTimeout(() => {
-    overlay.style.display = 'none';
-  }, 1000);
+function updateProfile(index, userData, connections) {
+  const imgElement = document.getElementById(`avatar${index + 1}`);
+  const nameElement = document.getElementById(`name${index + 1}`);
+  const flagsElement = document.getElementById(`flags${index + 1}`);
+  const connsElement = document.getElementById(`conns${index + 1}`);
+
+  // Avatar URL
+  const avatarUrl = userData.discord_user.avatar?.startsWith('a_')
+    ? `https://cdn.discordapp.com/avatars/${userData.discord_user.id}/${userData.discord_user.avatar}.gif`
+    : userData.discord_user.avatar
+      ? `https://cdn.discordapp.com/avatars/${userData.discord_user.id}/${userData.discord_user.avatar}.png`
+      : `https://cdn.discordapp.com/embed/avatars/1.png`;
+
+  imgElement.src = avatarUrl;
+  nameElement.textContent = userData.discord_user.global_name || userData.discord_user.username || ' ';
+
+  // Badges (flags)
+  const badgeMap = {
+    staff: "<img class='flag-icon' title='Discord Staff' src='images/flags/staff.svg'>",
+    partner: "<img class='flag-icon' title='Partner' src='images/flags/partner.svg'>",
+    hypesquad: "<img class='flag-icon' title='HypeSquad' src='images/flags/hypesquad.svg'>",
+    bug_hunter_level_1: "<img class='flag-icon' title='Bug Hunter Level 1' src='images/flags/bughunter1.svg'>",
+    bug_hunter_level_2: "<img class='flag-icon' title='Bug Hunter Level 2' src='images/flags/bughunter2.svg'>",
+    verified_bot_developer: "<img class='flag-icon' title='Verified Bot Developer' src='images/flags/botdev.svg'>",
+    certified_moderator: "<img class='flag-icon' title='Certified Moderator' src='images/flags/mod.svg'>",
+    active_developer: "<img class='flag-icon' title='Active Developer' src='images/flags/activedev.svg'>",
+    early_supporter: "<img class='flag-icon' title='Early Supporter' src='images/flags/earlysupport.svg'>",
+  };
+
+  // Função para mapear flag para bit
+  function getFlagBit(flagName) {
+    const mapping = {
+      staff: 0,
+      partner: 1,
+      hypesquad: 2,
+      bug_hunter_level_1: 3,
+      bug_hunter_level_2: 14,
+      verified_bot_developer: 16,
+      certified_moderator: 17,
+      active_developer: 22,
+      early_supporter: 9,
+    };
+    return mapping[flagName] ?? 0;
+  }
+
+  // Extrai badges que o usuário tem
+  const badgesHtml = userData.discord_user.public_flags
+    ? Object.entries(badgeMap)
+      .filter(([key]) => (userData.discord_user.public_flags & (1 << getFlagBit(key))) !== 0)
+      .map(([, html]) => html)
+      .join('')
+    : '';
+
+  flagsElement.innerHTML = badgesHtml || `<img class='flag-icon' src='images/flags/none.svg' alt='Nenhuma badge'>`;
+
+  // Define conexões por usuário (exemplo)
+  let userConnections = [];
+  if (userData.discord_user.id === '1355225924018245796') {
+    userConnections = [
+      { type: 'instagram', name: userData.social?.instagram || 'exemplo_insta' },
+      { type: 'discord', name: userData.discord_user.username }
+    ];
+  } else if (userData.discord_user.id === '865792844212207636') {
+    userConnections = [
+      { type: 'tiktok', name: userData.social?.tiktok || 'exemplo_tiktok' },
+      { type: 'discord', name: userData.discord_user.username }
+    ];
+  }
+
+  if (userConnections.length > 0) {
+    connsElement.className = 'conn-container';
+    connsElement.innerHTML = userConnections.map(conn => {
+      const lowerType = conn.type.toLowerCase();
+      if (!(lowerType in connections)) return '';
+      const connection = connections[lowerType];
+      if (connection.user) {
+        return `<a href="${connection.link}${conn.name}" target="_blank" class="tooltip">${connection.icon}<span class="tooltiptext">${conn.name}</span></a>`;
+      }
+      return `<a class="tooltip">${connection.icon}<span class="tooltiptext">${conn.name}</span></a>`;
+    }).join(' ');
+  } else {
+    connsElement.className = 'conn-container no-connections';
+    connsElement.innerHTML = "<img class='conn-icon' src='images/connections/invis.svg' alt=' '>";
+  }
 }
-
-function Musica() {
-  const audio = document.getElementById('audio');
-  audio.muted = false;
-  audio.volume = 0.3;
-  audio.play().catch(() => {});
-}
-
-document.addEventListener("DOMContentLoaded", async function () {
-  const audio = document.getElementById("audio");
-  const muteButton = document.getElementById("muteButton");
-  const muteIcon = document.getElementById("muteIcon");
-  const unmuteIcon = document.getElementById("unmuteIcon");
-
-  if (!audio.muted) {
-    muteIcon.style.display = "none";
-    unmuteIcon.style.display = "inline-block";
-  }
-
-  try {
-    const views = await fetch(`https://ogp.wtf/api/starsviews`, { method: 'POST' }).then(res => res.json());
-    document.getElementById("views").innerHTML = views.views;
-  } catch (e) {
-    console.warn("Falha ao carregar visualizações.");
-  }
-
-  muteButton.addEventListener("click", function () {
-    audio.muted = !audio.muted;
-    muteIcon.style.display = audio.muted ? "inline-block" : "none";
-    unmuteIcon.style.display = audio.muted ? "none" : "inline-block";
-  });
-});
-
-document.querySelector('.profile-container').onmousemove = e => {
-  for (const profile of document.querySelectorAll('.profile')) {
-    const rect = profile.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    document.documentElement.style.setProperty('--mouse-x', `${x}px`);
-    document.documentElement.style.setProperty('--mouse-y', `${y}px`);
-  }
-};
