@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  const usersIds = ['1355225924018245796', '865792844212207636'];
+  const userId = '1355225924018245796';
   const profileContainer = document.querySelector('.profile-container');
 
   const connections = {
@@ -20,23 +20,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   };
 
-  for (let i = 0; i < usersIds.length; i++) {
-    const id = usersIds[i];
-    const userLink = `https://discord.com/users/${id}`;
-    const profile = createProfile(i, userLink);
-    profileContainer.appendChild(profile);
+  const userLink = `https://discord.com/users/${userId}`;
+  const profile = createProfile(0, userLink);
+  profileContainer.appendChild(profile);
 
-    try {
-      const res = await fetch(`https://api.lanyard.rest/v1/users/${id}`);
-      const data = await res.json();
-      if (data.success) {
-        updateProfile(i, data.data, connections);
-      } else {
-        console.warn('Lanyard API error for user', id);
-      }
-    } catch (error) {
-      console.error('Fetch error:', error);
+  try {
+    const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+    const data = await res.json();
+    if (data.success) {
+      updateProfile(0, data.data, connections);
+    } else {
+      console.warn('Lanyard API error for user', userId);
     }
+  } catch (error) {
+    console.error('Fetch error:', error);
   }
 });
 
@@ -118,7 +115,6 @@ function updateProfile(index, userData, connections) {
     early_supporter: "<img class='flag-icon' title='Early Supporter' src='images/flags/earlysupport.svg'>",
   };
 
-  // Função para mapear flag para bit
   function getFlagBit(flagName) {
     const mapping = {
       staff: 0,
@@ -134,7 +130,6 @@ function updateProfile(index, userData, connections) {
     return mapping[flagName] ?? 0;
   }
 
-  // Extrai badges que o usuário tem
   const badgesHtml = userData.discord_user.public_flags
     ? Object.entries(badgeMap)
       .filter(([key]) => (userData.discord_user.public_flags & (1 << getFlagBit(key))) !== 0)
@@ -144,19 +139,11 @@ function updateProfile(index, userData, connections) {
 
   flagsElement.innerHTML = badgesHtml || `<img class='flag-icon' src='images/flags/none.svg' alt='Nenhuma badge'>`;
 
-  // Define conexões por usuário (exemplo)
-  let userConnections = [];
-  if (userData.discord_user.id === '1355225924018245796') {
-    userConnections = [
-      { type: 'instagram', name: userData.social?.instagram || 'exemplo_insta' },
-      { type: 'discord', name: userData.discord_user.username }
-    ];
-  } else if (userData.discord_user.id === '865792844212207636') {
-    userConnections = [
-      { type: 'tiktok', name: userData.social?.tiktok || 'exemplo_tiktok' },
-      { type: 'discord', name: userData.discord_user.username }
-    ];
-  }
+  // Conexões: aqui você pode definir quais aparecem para esse usuário
+  const userConnections = [
+    { type: 'instagram', name: userData.social?.instagram || 'exemplo_insta' },
+    { type: 'discord', name: userData.discord_user.username }
+  ];
 
   if (userConnections.length > 0) {
     connsElement.className = 'conn-container';
