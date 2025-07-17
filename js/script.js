@@ -18,26 +18,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function extractBadgesFromFlags(flags, legacy_username) {
   const badgeMap = {
-    1 << 0: "staff",
-    1 << 1: "partner",
-    1 << 2: "hypesquad",
-    1 << 3: "bug_hunter_level_1",
-    1 << 6: "hypesquad_house_1",
-    1 << 7: "hypesquad_house_2",
-    1 << 8: "hypesquad_house_3",
-    1 << 9: "premium",
-    1 << 14: "bug_hunter_level_2",
-    1 << 16: "verified_developer",
-    1 << 17: "certified_moderator",
-    1 << 22: "active_developer",
-    1 << 30: "legacy_username"
+    1: "staff",
+    2: "partner",
+    4: "hypesquad",
+    8: "bug_hunter_level_1",
+    64: "hypesquad_house_1",
+    128: "hypesquad_house_2",
+    256: "hypesquad_house_3",
+    512: "premium",
+    16384: "bug_hunter_level_2",
+    65536: "verified_developer",
+    131072: "certified_moderator",
+    4194304: "active_developer",
+    1073741824: "legacy_username"
   };
 
   const badges = [];
 
-  for (const [bit, badge] of Object.entries(badgeMap)) {
-    if ((flags & bit) !== 0) {
-      badges.push({ id: badge, legacy_username });
+  for (const bit in badgeMap) {
+    if ((flags & bit) != 0) {
+      badges.push({ id: badgeMap[bit], legacy_username });
     }
   }
 
