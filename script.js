@@ -9,6 +9,8 @@ const apiUrl = `https://api.lanyard.rest/v1/users/${userId}`;
 
 function updateProfile(data) {
   const user = data.discord_user;
+  const discordStatus = data.discord_status;
+  const customStatus = data.activities.find(a => a.type === 4); // Tipo 4 = Custom Status
 
   // Avatar URL
   const avatarUrl = user.avatar
@@ -17,6 +19,9 @@ function updateProfile(data) {
 
   document.getElementById('avatar').src = avatarUrl;
   document.getElementById('username').textContent = `${user.username}#${user.discriminator}`;
+  // Opcional mostrar status:
+  // document.getElementById('status').textContent = `Status: ${discordStatus}`;
+  // document.getElementById('custom-status').textContent = customStatus ? customStatus.state : '';
 }
 
 fetch(apiUrl)
@@ -61,10 +66,11 @@ card.addEventListener('mousemove', (e) => {
   const offsetX = (x / rect.width) * 2 - 1;
   const offsetY = (y / rect.height) * 2 - 1;
 
-  const rotateX = offsetY * 10;
-  const rotateY = offsetX * 10;
+  // Efeito parallax mais intenso
+  const rotateX = offsetY * 15; // 15 graus
+  const rotateY = offsetX * 15;
 
-  card.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+  card.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.1)`;
 });
 
 card.addEventListener('mouseleave', () => {
