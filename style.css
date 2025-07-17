@@ -1,28 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* Reset e corpo */
 body, html {
   height: 100%;
+  margin: 0;
   background-color: #000000;
   font-family: 'Comfortaa', cursive;
   color: white;
   overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
+/* Particles atrás de tudo */
 #particles-js {
   position: fixed;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  z-index: 0;
+  z-index: 1;
 }
 
+/* Card centralizado */
 .profile-card {
   position: relative;
   width: 320px;
@@ -36,10 +37,10 @@ body, html {
   cursor: default;
   transform-style: preserve-3d;
   border: none;
-  margin: 6rem auto;
   z-index: 10;
 }
 
+/* Hover do card */
 .profile-card:hover {
   background: rgba(20, 20, 20, 0.7);
   box-shadow: 0 0 60px rgba(255, 255, 255, 0.4);
@@ -47,72 +48,77 @@ body, html {
   cursor: default;
 }
 
+/* Avatar */
 .avatar {
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
+  margin-bottom: 1rem;
   object-fit: cover;
-  margin-bottom: 1rem;
   border: 3px solid white;
-  box-shadow: 0 0 20px white;
 }
 
-h1#username {
-  font-weight: 700;
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
-  text-shadow: 0 0 6px #fff;
+/* Username */
+#username {
+  margin: 0 0 1rem 0;
 }
 
+/* Redes sociais */
 .socials {
   display: flex;
   justify-content: center;
-  gap: 1.4rem;
-  margin-bottom: 1.4rem;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .social-icon img {
   width: 30px;
-  height: 30px;
   filter: drop-shadow(0 0 2px white);
   transition: filter 0.3s ease;
 }
 
 .social-icon:hover img {
-  filter: drop-shadow(0 0 5px #ff77ff);
+  filter: drop-shadow(0 0 6px white);
 }
 
-.views {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 1.5rem;
-}
-
-.views img {
-  width: 25px;
-  height: 25px;
-  filter: drop-shadow(0 0 3px white);
-}
-
-#view-count {
-  font-size: 1.4rem;
-  font-weight: 600;
-  text-shadow: 0 0 4px white;
-}
-
+/* Botão áudio */
 #audio-btn {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.15);
   border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 30px;
   color: white;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   cursor: pointer;
-  user-select: none;
-  filter: drop-shadow(0 0 3px white);
-  transition: filter 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 #audio-btn:hover {
-  filter: drop-shadow(0 0 8px #77ffff);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* Views no canto superior direito */
+.views {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background: rgba(20, 20, 20, 0.7);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px white;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.views img {
+  width: 24px;
+  filter: drop-shadow(0 0 2px white);
+}
+
+.views span {
+  font-size: 1.2rem;
+  user-select: none;
 }
