@@ -1,19 +1,18 @@
-/* Reset e corpo */
+/* Reset */
 body, html {
   height: 100%;
   margin: 0;
-  background-color: #000000;
+  background-color: #000;
   font-family: 'Comfortaa', cursive;
   color: white;
   overflow: hidden;
-
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
 }
 
-/* Particles atrás de tudo */
+/* Partículas */
 #particles-js {
   position: fixed;
   width: 100%;
@@ -23,35 +22,28 @@ body, html {
   z-index: 1;
 }
 
-/* Card centralizado */
+/* Card menor e central */
 .profile-card {
-  position: relative;
-  width: 320px;
+  width: 260px;
   background: transparent;
   border-radius: 20px;
-  padding: 2rem 3rem;
-  box-shadow: none;
-  transition: background-color 0.4s ease, box-shadow 0.4s ease, transform 0.1s ease;
+  padding: 2rem 2rem;
   text-align: center;
-  user-select: none;
-  cursor: default;
+  transition: 0.4s ease;
   transform-style: preserve-3d;
-  border: none;
   z-index: 10;
 }
 
-/* Hover do card */
 .profile-card:hover {
   background: rgba(20, 20, 20, 0.7);
   box-shadow: 0 0 60px rgba(255, 255, 255, 0.4);
   border: 1px solid rgba(255,255,255,0.3);
-  cursor: default;
 }
 
 /* Avatar */
 .avatar {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   margin-bottom: 1rem;
   object-fit: cover;
@@ -67,12 +59,12 @@ body, html {
 .socials {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
 }
 
 .social-icon img {
-  width: 30px;
+  width: 26px;
   filter: drop-shadow(0 0 2px white);
   transition: filter 0.3s ease;
 }
@@ -97,28 +89,27 @@ body, html {
   background: rgba(255, 255, 255, 0.35);
 }
 
-/* Views no canto superior direito */
+/* Visualizações no canto superior da TELA */
 .views {
   position: fixed;
   top: 15px;
   right: 15px;
   background: rgba(20, 20, 20, 0.7);
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.9rem;
   border-radius: 12px;
   box-shadow: 0 0 10px white;
   z-index: 20;
-
   display: flex;
   align-items: center;
   gap: 0.6rem;
 }
 
 .views img {
-  width: 24px;
+  width: 22px;
   filter: drop-shadow(0 0 2px white);
 }
 
 .views span {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   user-select: none;
 }
