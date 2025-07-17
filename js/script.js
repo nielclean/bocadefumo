@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Adiciona manualmente as redes
       connectedAccounts.push({ type: 'tiktok', name: 'nogamblenocrypto' });
-      connectedAccounts.push({ type: 'instagram', name: 'outfest' });
+      connectedAccounts.push({ type: 'instagram', name: 'outfeast' });
 
       atualizarprofile(0, {
         user: {
@@ -162,7 +162,7 @@ function atualizarprofile(index, userData) {
       link: 'https://www.youtube.com/channel/',
     },
     instagram: {
-      icon: "<img class='conn-icon' src='https://img.icons8.com/color/48/instagram-new--v2.png",
+      icon: "<img class='conn-icon' src='https://img.icons8.com/color/48/instagram-new--v2.png'>",
       link: 'https://www.instagram.com/',
       user: true
     },
