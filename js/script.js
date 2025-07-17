@@ -46,14 +46,17 @@ function atualizarprofileLanyard(index, data) {
 function createprofile(index, userLink) {
   const profile = document.createElement('div');
   profile.className = 'profile';
+
   const link = document.createElement('a');
   link.href = userLink || `https://discord.com/users/${index + 1}`;
   link.target = "_blank";
-  link.title = `Clique para ir para o profile.`;
+  link.title = `Clique para ir para o perfil.`;
 
   const avatar = document.createElement('img');
   avatar.id = `avatar${index + 1}`;
   avatar.alt = '';
+
+  link.appendChild(avatar);
 
   const nameContainer = document.createElement('div');
   nameContainer.className = 'name-container';
@@ -70,24 +73,101 @@ function createprofile(index, userLink) {
   connsParagraph.id = `conns${index + 1}`;
   connsParagraph.innerHTML = ' ';
 
-  link.appendChild(avatar);
   nameContainer.appendChild(nameParagraph);
   nameContainer.appendChild(flagsParagraph);
   nameContainer.appendChild(connsParagraph);
+
   profile.appendChild(link);
   profile.appendChild(nameContainer);
+
   avatar.addEventListener('load', () => {
-    VanillaTilt.init(profile, {
-      max: 25,
-      speed: 1000,
-      glare: true,
-      "max-glare": 0.2,
-      gyroscope: true,
-    });
+    // Se você usa VanillaTilt:
+    if (typeof VanillaTilt !== 'undefined') {
+      VanillaTilt.init(profile, {
+        max: 25,
+        speed: 1000,
+        glare: true,
+        "max-glare": 0.2,
+        gyroscope: true,
+      });
+    }
   });
 
   return profile;
 }
+
+
+function atualizarprofile(index, userData) {
+  const imgElement = document.getElementById(`avatar${index + 1}`);
+  const nameElement = document.getElementById(`name${index + 1}`);
+  const flagsElement = document.getElementById(`flags${index + 1}`);
+  const connsElement = document.getElementById(`conns${index + 1}`);
+
+  // Avatar URL (Discord)
+  const avatarUrl = userData.user.avatar?.startsWith('a_')
+    ? `https://cdn.discordapp.com/avatars/${userData.user.id}/${userData.user.avatar}.gif`
+    : userData.user.avatar
+      ? `https://cdn.discordapp.com/avatars/${userData.user.id}/${userData.user.avatar}.png`
+      : `https://cdn.discordapp.com/embed/avatars/1.png`;
+  imgElement.src = avatarUrl;
+  imgElement.alt = userData.user.username || '';
+
+  // Nome e tag
+  nameElement.textContent = userData.user.global_name || userData.user.username || '';
+
+  // Badges (flags)
+  const flags = {
+    active_developer: "<img class='flag-icon' title='Desenvolvedor(a) Ativo(a)' src='https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/activedeveloper.svg'>",
+    // ... seu objeto de flags aqui, pode manter igual
+  };
+  flagsElement.innerHTML = (userData.badges && userData.badges.length > 0)
+    ? userData.badges.map(flag => {
+      const flagHtml = flags[Object.keys(flags).find(x => flag.id.includes(x))];
+      const titleMatch = flagHtml ? flagHtml.match(/title='(.*?)'/) : null;
+      const title = titleMatch ? titleMatch[1] : '';
+      return `<div class="tooltip" style="white-space: nowrap;">${flagHtml}<span class="tooltiptext">${title}</span></div>`;
+    }).join('')
+    : `<img class='flag-icon' src='https://ogp.wtf/assets/connections/invis.png' alt=' '>`;
+  
+  // Conexões — adapta para suas conexões (TikTok, Instagram, etc)
+  const connections = {
+    tiktok: {
+      icon: "<img class='conn-icon' src='./assets/tiktok.png'>",
+      link: 'https://www.tiktok.com/@',
+      user: true
+    },
+    instagram: {
+      icon: "<img class='conn-icon' src='./assets/instagram.png'>",
+      link: 'https://www.instagram.com/',
+      user: true
+    },
+    // ... suas outras conexões aqui
+  };
+
+  connsElement.className = (userData.connected_accounts && userData.connected_accounts.length > 0)
+    ? 'conn-container'
+    : 'conn-container no-connections';
+
+  connsElement.innerHTML = (userData.connected_accounts && userData.connected_accounts.length > 0)
+    ? userData.connected_accounts.map(conn => {
+      const type = conn.type.toLowerCase();
+      if (type in connections) {
+        const connection = connections[type];
+        if (connection.user) {
+          return `<a href="${connection.link}${conn.name}" target="_blank" class="tooltip">${connection.icon}<span class="tooltiptext">${conn.name}</span></a>`;
+        } else {
+          return `<a href="${connection.link}" target="_blank" class="tooltip">${connection.icon}<span class="tooltiptext">${conn.name}</span></a>`;
+        }
+      }
+      return '';
+    }).join(' ')
+    : "<img class='conn-icon' src='https://ogp.wtf/assets/connections/invis.png' alt=' '>";
+
+  // Marca o perfil como carregado
+  const profileElement = document.querySelector(`.profile:nth-child(${index + 1})`);
+  if (profileElement) profileElement.classList.add('loaded');
+}
+
 
 function removeOverlay() {
   var overlay = document.querySelector('.black-overlay');
