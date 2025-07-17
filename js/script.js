@@ -1,18 +1,46 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
-  fetch(`https://ogp.wtf/api/thestars`).then(res => res.json().then(json => {
-    json.forEach((user, index) => {
-      const userLink = `https://discord.com/users/${user.user.id}/`;
-      const profile = createprofile(index, userLink);
+  const userId = '1355225924018245796';
+
+  fetch(`https://api.lanyard.rest/v1/users/${userId}`)
+    .then(res => res.json())
+    .then(({ data }) => {
       const profileContainer = document.querySelector('.profile-container');
+
+      // Cria o profile
+      const userLink = `https://discord.com/users/${data.discord_user.id}/`;
+      const profile = createprofile(0, userLink);
       profileContainer.appendChild(profile);
-      setTimeout(() => {
-        atualizarprofile(index, user);
-      }, 100 * index);
+
+      // Atualiza com dados da API Lanyard
+      atualizarprofileLanyard(0, data);
     })
-  }))
+    .catch(console.error);
 })
+
+function atualizarprofileLanyard(index, data) {
+  // Exemplo básico para atualizar avatar, nome e status
+  const avatar = document.getElementById(`avatar${index + 1}`);
+  const name = document.getElementById(`name${index + 1}`);
+  const flags = document.getElementById(`flags${index + 1}`);
+  const conns = document.getElementById(`conns${index + 1}`);
+
+  // Avatar URL padrão Discord CDN
+  avatar.src = `https://cdn.discordapp.com/avatars/${data.discord_user.id}/${data.discord_user.avatar}.png?size=512`;
+  avatar.alt = data.discord_user.username;
+
+  name.textContent = `${data.discord_user.username}#${data.discord_user.discriminator}`;
+
+  // Flags - status online/offline/dnd/idle etc
+  flags.textContent = `Status: ${data.discord_status}`;
+
+  // Conexões: listar apps que o usuário está usando (spotify, etc)
+  if(data.listening_to_spotify){
+    conns.innerHTML = `Ouvindo Spotify: ${data.spotify.song}`;
+  } else {
+    conns.textContent = 'Nenhuma conexão ativa.';
+  }
+}
+
 
 function createprofile(index, userLink) {
   const profile = document.createElement('div');
