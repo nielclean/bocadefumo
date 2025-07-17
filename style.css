@@ -1,138 +1,127 @@
-/* Reset básico */
-* {
+/* Fonte Comfortaa */
+body, html {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body, html {
   height: 100%;
-  width: 100%;
-  font-family: 'Comfortaa', cursive, sans-serif;
-  background-color: #000000; /* fundo preto sólido */
-  color: #fff;
+  background-color: #000000;
+  font-family: 'Comfortaa', cursive;
+  color: white;
   overflow: hidden;
+  user-select: none;
 }
 
-/* Partículas */
 #particles-js {
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  background-color: #000000;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 
-/* Card principal */
 .profile-card {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(20, 20, 20, 0.6); /* mais transparente */
-  border: 1px solid #333;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  transform: translate(-50%, -50%) perspective(600px) rotateX(0deg) rotateY(0deg);
+
+  background: rgba(20, 20, 20, 0);
   border-radius: 20px;
   padding: 30px;
   width: 320px;
   text-align: center;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0);
   backdrop-filter: blur(10px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: 
+    background 0.4s ease, 
+    box-shadow 0.4s ease, 
+    transform 0.1s ease,
+    opacity 0.4s ease;
   cursor: default;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
 }
 
 .profile-card:hover {
-  transform: translate(-50%, -50%) scale(1.05);
+  background: rgba(20, 20, 20, 0.6);
   box-shadow:
     0 0 15px rgba(255, 255, 255, 0.2),
     0 0 30px rgba(255, 255, 255, 0.15);
+  opacity: 1;
+  pointer-events: auto;
   cursor: pointer;
 }
 
-/* Avatar */
 .avatar {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  border: 3px solid #555;
-  margin-bottom: 15px;
+  border: 3px solid white;
+  object-fit: cover;
+  margin-bottom: 20px;
 }
 
-/* Nome do usuário */
-#username {
-  font-size: 1.5em;
-  margin-bottom: 5px;
-  font-weight: 600;
+h1#username {
+  margin: 0;
+  font-size: 2.2em;
+  margin-bottom: 20px;
 }
 
-/* Status antigo (escondido) */
-#status {
-  display: none;
-}
-
-/* Custom status */
-#custom-status {
-  font-size: 0.9em;
-  color: #aaa;
-  margin-bottom: 10px;
-}
-
-/* Ícones sociais */
 .socials {
-  margin-top: 15px;
+  margin: 20px 0;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
 }
 
 .social-icon img {
-  width: 28px;
-  height: 28px;
-  filter: brightness(1);
-  transition: filter 0.3s ease, transform 0.3s ease;
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 0 1px black);
+  transition: transform 0.3s ease;
 }
 
 .social-icon:hover img {
-  filter: brightness(0.7);
-  transform: scale(1.1);
-}
-
-/* Botão de áudio */
-#audio-btn {
-  margin-top: 10px;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.4em;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-#audio-btn:hover {
   transform: scale(1.2);
 }
 
-/* Contador de views com ícone - canto superior direito */
 .views {
-  position: fixed;
-  top: 20px;
-  right: 20px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 1.2em;
-  color: #ccc;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 6px 12px;
-  border-radius: 12px;
-  z-index: 10;
-  font-weight: 500;
-  backdrop-filter: blur(5px);
+  gap: 6px;
+  font-weight: 700;
+  font-size: 18px;
+  user-select: none;
 }
 
-.views .view-icon {
-  width: 28px;
-  height: 28px;
-  filter: brightness(1);
+.views img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(1.2);
+}
+
+#view-count {
+  font-size: 20px;
+}
+
+#audio-btn {
+  margin-top: 20px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+#audio-btn:hover {
+  color: #1db954;
 }
