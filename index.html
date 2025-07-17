@@ -12,32 +12,27 @@
 </head>
 
 <body>
-  <!-- Música de fundo -->
   <audio id="audio" preload="auto">
     <source src="media/musica.mp3" type="audio/mp3" />
     Seu navegador não suporta áudio.
   </audio>
 
-  <!-- Vídeo de fundo -->
   <video id="video-background" autoplay muted loop>
     <source src="media/video.mp4" type="video/mp4" />
     Seu navegador não suporta vídeo.
   </video>
 
-  <!-- Overlay de entrada -->
   <div class="overlay" id="overlay">
     <h1>clique para entrar</h1>
     <button id="enterBtn">Entrar</button>
   </div>
 
-  <!-- Controle de volume -->
   <div class="volume-control">
     <img src="images/low.png" class="volume-icon" alt="volume baixo" />
     <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.5" />
     <img src="images/high.png" class="volume-icon" alt="volume alto" />
   </div>
 
-  <!-- Card de perfil -->
   <div class="profile-card">
     <div class="profile-pic-wrapper">
       <img class="profile-pic" data-user-id="1355225924018245796" alt="avatar" />
@@ -48,7 +43,6 @@
       <p class="nickname" data-user-id="1355225924018245796">@nickname</p>
     </div>
 
-    <!-- Spotify -->
     <div class="spotify-info" data-user-id="1355225924018245796" style="display: none;">
       <p>Ouvindo <img src="images/spotify.png" class="spotify-icon" /></p>
       <div class="spotify-details">
@@ -68,7 +62,6 @@
     </div>
   </div>
 
-  <!-- Script interno: música e entrada -->
   <script>
     const audio = document.getElementById('audio');
     const volumeControl = document.getElementById('volumeControl');
@@ -89,7 +82,6 @@
     });
   </script>
 
-  <!-- Script externo: Discord e Spotify -->
   <script src="js/script.js"></script>
 </body>
 </html>
