@@ -2,43 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Discord Profile</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="images/avatar.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <!-- Partículas -->
   <div id="particles-js"></div>
 
-  <!-- Contador de Views no topo direito -->
-  <div class="views">
-    <img src="https://img.icons8.com/ios-glyphs/90/FFFFFF/visible--v1.png" alt="Views" class="view-icon" />
-    <span id="view-count">0</span>
-  </div>
-
-  <!-- Cartão do Perfil -->
   <div class="profile-card">
     <img id="avatar" src="images/avatar.png" alt="Avatar" class="avatar" />
     <h1 id="username">Loading...</h1>
-    <!-- Status removido -->
-    <p id="custom-status"></p>
 
     <div class="socials">
-      <a href="https://instagram.com/outfeast" target="_blank" class="social-icon">
+      <a href="https://instagram.com/yourusername" target="_blank" class="social-icon">
         <img src="https://img.icons8.com/ios/50/FFFFFF/instagram-new.png" alt="Instagram" />
       </a>
-      <a href="https://tiktok.com/@nogamblenocrypto" target="_blank" class="social-icon">
+      <a href="https://tiktok.com/@yourusername" target="_blank" class="social-icon">
         <img src="https://img.icons8.com/ios/50/FFFFFF/tiktok--v1.png" alt="TikTok" />
       </a>
+    </div>
+
+    <div class="views">
+      <img src="https://img.icons8.com/ios-glyphs/90/FFFFFF/visible--v1.png" alt="Views" />
+      <span id="view-count">0</span>
     </div>
 
     <button id="audio-btn">🔊</button>
     <audio id="bg-audio" src="media/music.mp3" loop></audio>
   </div>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script src="script.js"></script>
 </body>
