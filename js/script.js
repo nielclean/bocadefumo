@@ -7,8 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const profile = createprofile(0, userLink);
       const profileContainer = document.querySelector('.profile-container');
       profileContainer.appendChild(profile);
+
+      // Adapta os dados da lanyard para o formato esperado pelo atualizarprofile
+      const adaptedUserData = {
+        user: data.discord_user,
+        badges: data.active_on_discord ? ["premium"] : [], // Exemplo simples
+        connected_accounts: [], // Pode deixar vazio ou preencher conforme necessidade
+        legacy_username: null,
+      };
+
       setTimeout(() => {
-        atualizarprofile(0, data);
+        atualizarprofile(0, adaptedUserData);
       }, 100);
     });
 });
