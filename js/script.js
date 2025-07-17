@@ -162,7 +162,7 @@ function atualizarprofile(index, userData) {
       link: 'https://www.youtube.com/channel/',
     },
     instagram: {
-      icon: "<img class='conn-icon' src='./assets/instagram.png'>",
+      icon: "<img class='conn-icon' src='https://img.icons8.com/color/48/instagram-new--v2.png",
       link: 'https://www.instagram.com/',
       user: true
     },
