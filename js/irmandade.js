@@ -197,7 +197,7 @@ document.addEventListener('keydown', function(e) {
 });
 
 function showProtectionAlert() {
-    alert('Chama no Discord caso tenha interesse no site: @dominacao');
+    alert('chama no Discord caso tenha interesse no site: @qc8x');
 }
 
 let devToolsOpened = false;
